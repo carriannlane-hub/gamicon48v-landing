@@ -232,13 +232,31 @@ export default function GamiCon48VLanding() {
       {/* Header */}
       <header className="relative z-10 pt-8 pb-4 px-4">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <div className="flex items-center">
-            {/* Full GamiCon logo */}
-            <img 
-              src="/logo-light.jpeg" 
-              alt="GamiCon48V 2026" 
-              className="h-10 sm:h-12 w-auto"
-            />
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Stair-step icon */}
+            <svg className="w-10 h-10 sm:w-12 sm:h-12" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              {/* Bottom row blocks */}
+              <rect x="0" y="44" width="18" height="14" rx="2" fill="#c45c4a"/>
+              <rect x="20" y="44" width="18" height="14" rx="2" fill="#85b1ce"/>
+              {/* Middle row blocks */}
+              <rect x="20" y="28" width="18" height="14" rx="2" fill="#f5e6c8"/>
+              <rect x="40" y="28" width="18" height="14" rx="2" fill="#4b6176"/>
+              {/* Top row block */}
+              <rect x="40" y="12" width="18" height="14" rx="2" fill="#c45c4a"/>
+              {/* Circle on bottom-left block - blue */}
+              <circle cx="9" cy="40" r="3" fill="#85b1ce"/>
+              {/* Circle on middle-left block - red */}
+              <circle cx="29" cy="24" r="3" fill="#c45c4a"/>
+              {/* Star at the very top */}
+              <polygon points="49,4 50.5,7.5 54,8 51.5,10.5 52,14 49,12.5 46,14 46.5,10.5 44,8 47.5,7.5" fill="#f59e0b"/>
+            </svg>
+            {/* Text */}
+            <div>
+              <h1 className="text-xl sm:text-2xl font-bold text-white" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
+                GamiCon<span className="text-amber-400">48V</span>
+              </h1>
+              <p className="text-slate-400 text-xs sm:text-sm">2026</p>
+            </div>
           </div>
           <a 
             href="https://www.sententiagamification.com/where-from" 
