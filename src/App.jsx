@@ -77,7 +77,7 @@ const scheduleData = [
     centralEnd: "7:00 PM",
     gmtStart: "2026-03-22T18:00:00Z",
     gmtEnd: "2026-03-23T00:00:00Z",
-    host: "John Chen",
+    host: "Artrell Williams",
     regions: "Western North America • Mexico • Central America",
     sessions: [
       { time: "18:00", speaker: "Artrell Williams & Jazmin Webster", title: "Intro Block", type: "intro", country: "USA" },
@@ -259,7 +259,7 @@ export default function GamiCon48VLanding() {
             </div>
           </div>
           <a 
-            href="https://www.sententiagamification.com/where-from" 
+            href="https://www.sententiagamification.com/offers/Vz6JW9LN/checkout" 
             target="_blank" 
             rel="noopener noreferrer"
             className="px-6 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-full hover:from-amber-400 hover:to-orange-400 transition-all shadow-lg hover:shadow-amber-500/25 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
@@ -290,7 +290,7 @@ export default function GamiCon48VLanding() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <a 
-              href="https://www.sententiagamification.com/where-from" 
+              href="https://www.sententiagamification.com/offers/Vz6JW9LN/checkout" 
               target="_blank" 
               rel="noopener noreferrer"
               className="px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-lg rounded-full hover:from-amber-400 hover:to-orange-400 transition-all shadow-xl hover:shadow-amber-500/30 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
@@ -508,7 +508,7 @@ export default function GamiCon48VLanding() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
-              href="https://www.sententiagamification.com/where-from" 
+              href="https://www.sententiagamification.com/offers/Vz6JW9LN/checkout" 
               target="_blank" 
               rel="noopener noreferrer"
               className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-lg sm:text-xl rounded-full hover:from-amber-400 hover:to-orange-400 transition-all shadow-xl hover:shadow-amber-500/30 hover:scale-105 text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
