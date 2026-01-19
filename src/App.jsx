@@ -530,9 +530,6 @@ export default function GamiCon48VLanding() {
             <a href="https://www.linkedin.com/company/gamicon" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 rounded">
               LinkedIn
             </a>
-            <a href="https://www.facebook.com/GamiCon" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 rounded">
-              Facebook
-            </a>
           </div>
           <div className="text-slate-400 text-sm">
             #GameBasedLearning
