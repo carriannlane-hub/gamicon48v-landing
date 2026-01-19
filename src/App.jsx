@@ -77,7 +77,7 @@ const scheduleData = [
     centralEnd: "7:00 PM",
     gmtStart: "2026-03-22T18:00:00Z",
     gmtEnd: "2026-03-23T00:00:00Z",
-    host: "Artrell Williams",
+    host: "TBA",
     regions: "Western North America • Mexico • Central America",
     sessions: [
       { time: "18:00", speaker: "Artrell Williams & Jazmin Webster", title: "Intro Block", type: "intro", country: "USA" },
@@ -259,7 +259,7 @@ export default function GamiCon48VLanding() {
             </div>
           </div>
           <a 
-            href="https://www.sententiagamification.com/offers/Vz6JW9LN/checkout" 
+            href="https://www.sententiagamification.com/where-from" 
             target="_blank" 
             rel="noopener noreferrer"
             className="px-6 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-full hover:from-amber-400 hover:to-orange-400 transition-all shadow-lg hover:shadow-amber-500/25 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
@@ -290,7 +290,7 @@ export default function GamiCon48VLanding() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <a 
-              href="https://www.sententiagamification.com/offers/Vz6JW9LN/checkout" 
+              href="https://www.sententiagamification.com/where-from" 
               target="_blank" 
               rel="noopener noreferrer"
               className="px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-lg rounded-full hover:from-amber-400 hover:to-orange-400 transition-all shadow-xl hover:shadow-amber-500/30 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
@@ -497,18 +497,9 @@ export default function GamiCon48VLanding() {
             Join learning designers from around the world for 48 hours of hands-on, playful exploration.
           </p>
           
-          {/* Discount Code */}
-          <div className="inline-block bg-gradient-to-r from-emerald-900/50 to-teal-900/50 border border-emerald-500/30 rounded-2xl px-5 sm:px-8 py-4 mb-8">
-            <p className="text-white text-base sm:text-lg">
-              Use code <span className="font-mono font-bold text-emerald-300 bg-emerald-950 px-2 sm:px-3 py-1 rounded text-sm sm:text-base">CARRIANN48V</span>
-              <br className="sm:hidden" />
-              <span className="sm:inline"> for </span><strong>20% off US registration</strong>
-            </p>
-          </div>
-
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
-              href="https://www.sententiagamification.com/offers/Vz6JW9LN/checkout" 
+              href="https://www.sententiagamification.com/where-from" 
               target="_blank" 
               rel="noopener noreferrer"
               className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-lg sm:text-xl rounded-full hover:from-amber-400 hover:to-orange-400 transition-all shadow-xl hover:shadow-amber-500/30 hover:scale-105 text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
