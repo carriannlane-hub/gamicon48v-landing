@@ -1,5 +1,29 @@
 import React, { useState, useEffect } from 'react';
 
+// Event start and end times in UTC
+const EVENT_START = new Date("2026-03-22T00:00:00Z");
+const EVENT_END = new Date("2026-03-24T00:00:00Z");
+
+// Get event dates in user's local timezone
+function getLocalEventDates() {
+  const startLocal = new Date(EVENT_START);
+  const endLocal = new Date(EVENT_END);
+  
+  const startMonth = startLocal.toLocaleDateString('en-US', { month: 'long' });
+  const startDay = startLocal.getDate();
+  const endMonth = endLocal.toLocaleDateString('en-US', { month: 'long' });
+  const endDay = endLocal.getDate();
+  const year = startLocal.getFullYear();
+  
+  // If same month, show "March 21–23, 2026"
+  // If different months, show "March 31 – April 2, 2026"
+  if (startMonth === endMonth) {
+    return `${startMonth} ${startDay}–${endDay}, ${year}`;
+  } else {
+    return `${startMonth} ${startDay} – ${endMonth} ${endDay}, ${year}`;
+  }
+}
+
 // Schedule data organized by block
 const scheduleData = [
   {
@@ -284,7 +308,7 @@ export default function GamiCon48VLanding() {
         <section className="relative z-10 px-4 py-12 sm:py-16 text-center">
         <div className="max-w-4xl mx-auto">
           <p className="text-amber-400 uppercase tracking-widest text-xs sm:text-sm mb-4" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
-            March 22–24, 2026 • Live Online
+            {getLocalEventDates()} (Your Local Time) • Live Online
           </p>
           <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-tight" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
             48 Hours of<br />
