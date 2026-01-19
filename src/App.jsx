@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Schedule data organized by block
 const scheduleData = [
@@ -80,7 +80,7 @@ const scheduleData = [
     host: "TBA",
     regions: "Western North America • Mexico • Central America",
     sessions: [
-      { time: "18:00", speaker: "TBA", title: "Intro Block", type: "intro", country: "" },
+      { time: "18:00", speaker: "Artrell Williams & Jazmin Webster", title: "Intro Block", type: "intro", country: "USA" },
       { time: "18:30", speaker: "Rebecca Arnett", title: "Hidden Gems: Free & Cheap Tools to Level Up Your Training", type: "playshop", country: "USA",
         description: "Stop paying for expensive platforms. Discover free game engines, design tools, and collaborative platforms that make gamification accessible to everyone." },
       { time: "20:00", speaker: "Steve Abrams", title: "Making the Story Move Us: Connecting Story Archetypes to Game Mechanics", type: "playshop", country: "USA" },
@@ -174,27 +174,6 @@ const scheduleData = [
   }
 ];
 
-// Event start and end times in UTC
-const EVENT_START = new Date("2026-03-22T00:00:00Z");
-const EVENT_END = new Date("2026-03-24T00:00:00Z");
-
-// Get session start time as Date object
-function getSessionStartTime(session, block) {
-  const [hours, minutes] = session.time.split(':').map(Number);
-  const date = new Date(block.gmtStart);
-  date.setUTCHours(hours, minutes, 0, 0);
-  return date;
-}
-
-// Get session end time (start of next session, or block end)
-function getSessionEndTime(session, sessionIndex, block) {
-  const sessions = block.sessions;
-  if (sessionIndex < sessions.length - 1) {
-    return getSessionStartTime(sessions[sessionIndex + 1], block);
-  }
-  return new Date(block.gmtEnd);
-}
-
 // Convert GMT time to user's local time
 function convertToLocal(gmtTimeStr, gmtDate) {
   const [hours, minutes] = gmtTimeStr.split(':').map(Number);
@@ -211,14 +190,6 @@ function convertToCentral(gmtTimeStr, gmtDate) {
   return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/Chicago' });
 }
 
-// Format time for display
-function formatTimeForDisplay(date, showSententralTime) {
-  if (showSententralTime) {
-    return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/Chicago' });
-  }
-  return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
-}
-
 // Get type badge styling
 function getTypeBadge(type) {
   const styles = {
@@ -233,187 +204,21 @@ function getTypeBadge(type) {
   return styles[type] || styles.talk;
 }
 
-export default function GamiCon48VSchedule() {
+export default function GamiCon48VLanding() {
   const [showSententralTime, setShowSententralTime] = useState(false);
   const [userTimezone, setUserTimezone] = useState('');
   const [expandedBlock, setExpandedBlock] = useState(null);
-  const [currentTime, setCurrentTime] = useState(new Date());
 
-  // Initialize timezone and set up auto-refresh
   useEffect(() => {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
     setUserTimezone(tz.replace(/_/g, ' '));
-
-    // Auto-refresh every minute
-    const interval = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 60000);
-
-    return () => clearInterval(interval);
   }, []);
-
-  // Calculate event status and current/next sessions
-  const eventStatus = useMemo(() => {
-    const now = currentTime;
-    
-    // Before event starts
-    if (now < EVENT_START) {
-      return { status: 'before', message: 'Event starts soon!' };
-    }
-    
-    // After event ends
-    if (now >= EVENT_END) {
-      return { status: 'after', message: 'Thanks for attending GamiCon48V 2026!' };
-    }
-
-    // During event - find current and next sessions
-    let currentSession = null;
-    let currentBlock = null;
-    let currentSessionIndex = null;
-    let nextSession = null;
-    let nextBlock = null;
-
-    // Flatten all sessions with their block info
-    const allSessions = [];
-    scheduleData.forEach(block => {
-      block.sessions.forEach((session, idx) => {
-        allSessions.push({
-          session,
-          block,
-          sessionIndex: idx,
-          startTime: getSessionStartTime(session, block),
-          endTime: getSessionEndTime(session, idx, block)
-        });
-      });
-    });
-
-    // Sort by start time
-    allSessions.sort((a, b) => a.startTime - b.startTime);
-
-    // Find current and next sessions
-    for (let i = 0; i < allSessions.length; i++) {
-      const item = allSessions[i];
-      
-      if (now >= item.startTime && now < item.endTime) {
-        currentSession = item.session;
-        currentBlock = item.block;
-        currentSessionIndex = item.sessionIndex;
-        
-        // Next session is the one after current
-        if (i + 1 < allSessions.length) {
-          nextSession = allSessions[i + 1].session;
-          nextBlock = allSessions[i + 1].block;
-        }
-        break;
-      } else if (now < item.startTime) {
-        // We're in a gap between sessions
-        nextSession = item.session;
-        nextBlock = item.block;
-        break;
-      }
-    }
-
-    return {
-      status: 'during',
-      currentSession,
-      currentBlock,
-      currentSessionIndex,
-      nextSession,
-      nextBlock,
-      allSessions
-    };
-  }, [currentTime]);
-
-  // Filter blocks to only show those with remaining sessions
-  const filteredScheduleData = useMemo(() => {
-    if (eventStatus.status !== 'during') return scheduleData;
-
-    const now = currentTime;
-    
-    return scheduleData.map(block => {
-      const filteredSessions = block.sessions.filter((session, idx) => {
-        const endTime = getSessionEndTime(session, idx, block);
-        return now < endTime; // Keep sessions that haven't ended
-      });
-
-      return {
-        ...block,
-        sessions: filteredSessions
-      };
-    }).filter(block => block.sessions.length > 0); // Only keep blocks with remaining sessions
-  }, [currentTime, eventStatus.status]);
 
   const getDisplayTime = (gmtTime, block) => {
     if (showSententralTime) {
       return convertToCentral(gmtTime, block.gmtStart);
     }
     return convertToLocal(gmtTime, block.gmtStart);
-  };
-
-  // Render a session card (reusable for Happening Now, Up Next, and schedule)
-  const renderSessionCard = (session, block, isHighlighted = false, highlightLabel = '') => {
-    const badge = getTypeBadge(session.type);
-    
-    return (
-      <div 
-        className={`rounded-2xl overflow-hidden border shadow-xl ${
-          isHighlighted 
-            ? 'bg-gradient-to-br from-amber-900/50 to-orange-900/30 border-amber-500/50' 
-            : 'bg-slate-800/70 border-slate-700/50'
-        }`}
-      >
-        {highlightLabel && (
-          <div className={`px-6 py-3 ${
-            highlightLabel === 'Happening Now' 
-              ? 'bg-gradient-to-r from-emerald-600 to-teal-600' 
-              : 'bg-gradient-to-r from-amber-600 to-orange-600'
-          }`}>
-            <p className="text-white font-bold text-sm uppercase tracking-wider" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
-              {highlightLabel}
-            </p>
-          </div>
-        )}
-        <div className="px-6 py-5">
-          <div className="flex flex-col md:flex-row md:items-start gap-4">
-            <div className="flex items-center gap-3 md:block md:flex-shrink-0 md:w-28">
-              <p className="text-amber-400 font-mono font-semibold text-lg">
-                {getDisplayTime(session.time, block)}
-              </p>
-              <span className={`md:hidden px-2 py-0.5 ${badge.bg} ${badge.text} text-xs font-semibold rounded-full`}>
-                {badge.label}
-              </span>
-            </div>
-            <div className="flex-grow">
-              <div className="hidden md:flex flex-wrap items-center gap-2 mb-2">
-                <span className={`px-3 py-1 ${badge.bg} ${badge.text} text-xs font-semibold rounded-full`}>
-                  {badge.label}
-                </span>
-                {session.country && (
-                  <span className="text-slate-300 text-sm">
-                    {session.country}
-                  </span>
-                )}
-                <span className="text-slate-400 text-sm">
-                  • Block {block.block}
-                </span>
-              </div>
-              <h5 className="text-xl font-semibold text-white mb-1" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
-                {session.title}
-              </h5>
-              <p className="text-sky-400 text-sm mb-2">
-                {session.speaker}
-                {session.country && <span className="md:hidden text-slate-300"> • {session.country}</span>}
-              </p>
-              {session.description && (
-                <p className="text-slate-300 text-base leading-relaxed">
-                  {session.description}
-                </p>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
   };
 
   return (
@@ -453,16 +258,15 @@ export default function GamiCon48VSchedule() {
               <p className="text-slate-400 text-xs sm:text-sm">2026</p>
             </div>
           </div>
-          {/* Live indicator */}
-          {eventStatus.status === 'during' && (
-            <div className="flex items-center gap-2 px-4 py-2 bg-emerald-900/50 border border-emerald-500/50 rounded-full">
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-              </span>
-              <span className="text-emerald-300 font-semibold text-sm" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>LIVE</span>
-            </div>
-          )}
+          <a 
+            href="https://www.sententiagamification.com/where-from" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="px-6 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-full hover:from-amber-400 hover:to-orange-400 transition-all shadow-lg hover:shadow-amber-500/25 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
+            style={{ fontFamily: 'Josefin Sans, sans-serif' }}
+          >
+            Register Now
+          </a>
         </div>
       </header>
 
@@ -480,87 +284,76 @@ export default function GamiCon48VSchedule() {
           </h2>
           <p className="text-lg sm:text-xl text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed">
             This is not a motivational event—it's a <strong className="text-white">PLAYFUL</strong> one. 
-            Join gamification experts, instructional designers, and learning innovators from around the globe to <strong className="text-white">reimagine learning through the power of play</strong>.
+            Join gamification experts, instructional designers, and learning innovators from around the globe.
           </p>
+          
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+            <a 
+              href="https://www.sententiagamification.com/where-from" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-lg rounded-full hover:from-amber-400 hover:to-orange-400 transition-all shadow-xl hover:shadow-amber-500/30 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
+              style={{ fontFamily: 'Josefin Sans, sans-serif' }}
+            >
+              Register Now →
+            </a>
+            <a 
+              href="https://www.sententiagamification.com/gamicon48v" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="px-8 py-4 border-2 border-slate-500 text-slate-300 font-semibold text-lg rounded-full hover:border-amber-400 hover:text-amber-400 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
+              style={{ fontFamily: 'Josefin Sans, sans-serif' }}
+            >
+              Learn More About GamiCon48V
+            </a>
+          </div>
+
         </div>
       </section>
 
-      {/* Event Status Messages */}
-      {eventStatus.status === 'after' && (
-        <section className="relative z-10 px-4 py-12">
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-slate-800/40 border border-emerald-500/20 rounded-2xl p-8 text-center shadow-[0_0_30px_-5px_rgba(16,185,129,0.2)]">
-              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
-                🎉 Thanks for Attending!
-              </h3>
-              <p className="text-lg text-slate-300 mb-4">
-                GamiCon48V 2026 has concluded. We hope you had an amazing 48 hours of playful learning!
-              </p>
-              <p className="text-slate-400">
-                Stay tuned for recordings and next year's event.
-              </p>
+      {/* Event Overview */}
+      <section className="relative z-10 px-4 py-16 bg-slate-800/50">
+        <div className="max-w-4xl mx-auto text-center">
+          <h3 className="text-3xl font-bold text-white mb-8" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
+            Reimagine Learning Through the Power of Play
+          </h3>
+          <p className="text-lg text-slate-300 leading-relaxed mb-8">
+            GamiCon48V is a <strong className="text-white">48-hour live online event</strong> for people who design learning. 
+            It brings together gamification and game-based learning experts, instructional designers, corporate trainers, 
+            and higher ed faculty from around the world.
+          </p>
+          <div className="grid md:grid-cols-4 gap-6 text-center">
+            <div className="bg-slate-700/50 rounded-xl p-6">
+              <div className="text-4xl font-bold text-amber-400 mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>8</div>
+              <p className="text-slate-300">Global Blocks</p>
+            </div>
+            <div className="bg-slate-700/50 rounded-xl p-6">
+              <div className="text-4xl font-bold text-amber-400 mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>35+</div>
+              <p className="text-slate-300">Sessions</p>
+            </div>
+            <div className="bg-slate-700/50 rounded-xl p-6">
+              <div className="text-4xl font-bold text-amber-400 mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>30+</div>
+              <p className="text-slate-300">Speakers</p>
+            </div>
+            <div className="bg-slate-700/50 rounded-xl p-6">
+              <div className="text-4xl font-bold text-amber-400 mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>12</div>
+              <p className="text-slate-300">Playshops</p>
             </div>
           </div>
-        </section>
-      )}
-
-      {/* Live Schedule Section - Only show during event */}
-      {eventStatus.status === 'during' && (
-        <>
-          {/* Prominent Schedule Heading */}
-          <section className="relative z-10 px-4 py-8">
-            <div className="max-w-6xl mx-auto text-center">
-              <h3 className="text-3xl sm:text-4xl font-bold text-white mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
-                📅 Live Schedule
-              </h3>
-              <p className="text-slate-400 text-sm">
-                Auto-updates every minute • Last updated: {currentTime.toLocaleTimeString()}
-              </p>
-            </div>
-          </section>
-
-          {/* Happening Now */}
-          {eventStatus.currentSession && (
-            <section className="relative z-10 px-4 pb-6">
-              <div className="max-w-6xl mx-auto">
-                {renderSessionCard(eventStatus.currentSession, eventStatus.currentBlock, true, 'Happening Now')}
-              </div>
-            </section>
-          )}
-
-          {/* Gap between sessions message */}
-          {!eventStatus.currentSession && eventStatus.nextSession && (
-            <section className="relative z-10 px-4 pb-6">
-              <div className="max-w-6xl mx-auto">
-                <div className="bg-slate-800/70 border border-slate-700/50 rounded-2xl p-6 text-center">
-                  <p className="text-slate-300 text-lg">
-                    Next session begins at{' '}
-                    <strong className="text-amber-400">
-                      {getDisplayTime(eventStatus.nextSession.time, eventStatus.nextBlock)}
-                    </strong>
-                  </p>
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* Up Next */}
-          {eventStatus.nextSession && (
-            <section className="relative z-10 px-4 pb-8">
-              <div className="max-w-6xl mx-auto">
-                {renderSessionCard(eventStatus.nextSession, eventStatus.nextBlock, true, 'Up Next')}
-              </div>
-            </section>
-          )}
-        </>
-      )}
+          <p className="text-slate-400 mt-8 text-lg">
+            Across eight hosted blocks, you'll learn new approaches, join the audience for Throwdown Showcase, 
+            connect with global leaders, and experience how gameful design transforms learning.
+          </p>
+        </div>
+      </section>
 
       {/* Time Zone Toggle */}
       <section className="relative z-10 px-4 py-4 sm:py-8 sm:sticky top-0 bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 shadow-xl">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="text-center sm:text-left">
             <h4 className="text-white font-semibold" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
-              {eventStatus.status === 'during' ? 'Remaining Sessions' : 'Session Schedule'}
+              Session Schedule
             </h4>
             <p className="text-slate-400 text-sm">
               {showSententralTime ? 'Sententral Time (Central US)' : `Your local time (${userTimezone})`}
@@ -592,7 +385,7 @@ export default function GamiCon48VSchedule() {
       {/* Schedule Blocks */}
       <section className="relative z-10 px-4 py-12">
         <div className="max-w-6xl mx-auto space-y-8">
-          {(eventStatus.status === 'during' ? filteredScheduleData : scheduleData).map((block) => (
+          {scheduleData.map((block) => (
             <div 
               key={block.block} 
               className="bg-slate-800/70 rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl"
@@ -629,18 +422,14 @@ export default function GamiCon48VSchedule() {
                     <p className="text-slate-300 text-sm">Hosted by <span className="text-white font-medium">{block.host}</span></p>
                     <p className="text-slate-400 text-sm">{block.regions}</p>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-slate-400 text-sm">{block.sessions.length} sessions</span>
-                    <svg 
-                      className={`w-6 h-6 text-slate-400 transition-transform ${expandedBlock === block.block ? 'rotate-180' : ''}`} 
-                      fill="none" 
-                      stroke="currentColor" 
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </div>
+                  <svg 
+                    className={`w-6 h-6 text-slate-400 transition-transform ${expandedBlock === block.block ? 'rotate-180' : ''}`} 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
                 </div>
               </button>
 
@@ -649,16 +438,10 @@ export default function GamiCon48VSchedule() {
                 <div className="border-t border-slate-700/50">
                   {block.sessions.map((session, idx) => {
                     const badge = getTypeBadge(session.type);
-                    const isCurrentSession = eventStatus.status === 'during' && 
-                      eventStatus.currentSession === session && 
-                      eventStatus.currentBlock.block === block.block;
-                    
                     return (
                       <div 
                         key={idx} 
-                        className={`px-4 sm:px-6 py-4 sm:py-5 ${idx !== block.sessions.length - 1 ? 'border-b border-slate-700/30' : ''} ${
-                          isCurrentSession ? 'bg-emerald-900/20 border-l-4 border-l-emerald-500' : 'hover:bg-slate-700/20'
-                        } transition-colors`}
+                        className={`px-4 sm:px-6 py-4 sm:py-5 ${idx !== block.sessions.length - 1 ? 'border-b border-slate-700/30' : ''} hover:bg-slate-700/20 transition-colors`}
                       >
                         <div className="flex flex-col md:flex-row md:items-start gap-2 sm:gap-4">
                           <div className="flex items-center gap-3 md:block md:flex-shrink-0 md:w-24">
@@ -668,22 +451,12 @@ export default function GamiCon48VSchedule() {
                             <span className={`md:hidden px-2 py-0.5 ${badge.bg} ${badge.text} text-xs font-semibold rounded-full`}>
                               {badge.label}
                             </span>
-                            {isCurrentSession && (
-                              <span className="md:hidden px-2 py-0.5 bg-emerald-500 text-white text-xs font-semibold rounded-full">
-                                NOW
-                              </span>
-                            )}
                           </div>
                           <div className="flex-grow">
                             <div className="hidden md:flex flex-wrap items-center gap-2 mb-2">
                               <span className={`px-3 py-1 ${badge.bg} ${badge.text} text-xs font-semibold rounded-full`}>
                                 {badge.label}
                               </span>
-                              {isCurrentSession && (
-                                <span className="px-3 py-1 bg-emerald-500 text-white text-xs font-semibold rounded-full animate-pulse">
-                                  LIVE NOW
-                                </span>
-                              )}
                               {session.country && (
                                 <span className="text-slate-300 text-sm">
                                   {session.country}
@@ -714,6 +487,39 @@ export default function GamiCon48VSchedule() {
         </div>
       </section>
 
+      {/* Final CTA */}
+      <section className="relative z-10 px-4 py-20 text-center bg-gradient-to-t from-slate-900 to-transparent">
+        <div className="max-w-3xl mx-auto">
+          <h3 className="text-4xl font-bold text-white mb-6" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
+            Ready to Play?
+          </h3>
+          <p className="text-xl text-slate-300 mb-8">
+            Join learning designers from around the world for 48 hours of hands-on, playful exploration.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a 
+              href="https://www.sententiagamification.com/where-from" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-lg sm:text-xl rounded-full hover:from-amber-400 hover:to-orange-400 transition-all shadow-xl hover:shadow-amber-500/30 hover:scale-105 text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
+              style={{ fontFamily: 'Josefin Sans, sans-serif' }}
+            >
+              Register Now →
+            </a>
+            <a 
+              href="https://www.sententiagamification.com/gamicon48v" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-10 py-4 border-2 border-slate-500 text-slate-300 font-semibold text-lg sm:text-xl rounded-full hover:border-amber-400 hover:text-amber-400 transition-all text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
+              style={{ fontFamily: 'Josefin Sans, sans-serif' }}
+            >
+              Learn More
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="relative z-10 px-4 py-8 border-t border-slate-700">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
@@ -723,9 +529,6 @@ export default function GamiCon48VSchedule() {
           <div className="flex gap-6">
             <a href="https://www.linkedin.com/company/gamicon" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 rounded">
               LinkedIn
-            </a>
-            <a href="https://www.facebook.com/GamiCon" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 rounded">
-              Facebook
             </a>
           </div>
           <div className="text-slate-400 text-sm">
