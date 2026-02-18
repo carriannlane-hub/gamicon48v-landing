@@ -36,17 +36,21 @@ const scheduleData = [
     host: "James Bishop and Jimbo Clark",
     regions: "East Asia • Southeast Asia • Oceania",
     sessions: [
-      { time: "00:00", speaker: "James Bishop", title: "Intro to Event", type: "intro", country: "Hong Kong" },
-      { time: "00:30", speaker: "Monica Cornetti", title: "Kickoff Keynote", type: "keynote", country: "USA" },
-      { time: "01:00", speaker: "Bernardo Letayf", title: "BlueRabbit", type: "sponsor", country: "Mexico" },
+      { time: "00:00", speaker: "James Bishop and Jimbo Clark", title: "Welcome to GamiCon48V 2026!", type: "intro", country: "Hong Kong" },
+      { time: "00:30", speaker: "Monica Cornetti", title: "F*ck Average", type: "keynote", additionalType: "talk", country: "USA" },
+      { time: "01:00", speaker: "Bernardo Letayf", title: "BlueRabbit", type: "sponsor", country: "Mexico", description: "Instructions for Using the Gamified Conference App BlueRabbit" },
+      { time: "01:15", speaker: "James Bishop", title: "Crossroads: Introduction to the Conference Charity", type: "experience", country: "Hong Kong" },
       { time: "01:30", speaker: "James Bishop", title: "How to Get Away with Murder at a Conference!", type: "talk", country: "Hong Kong", 
         description: "AI-powered design in action: Learn how a resilience conference was transformed into an 80-person murder mystery—designed 80% with AI in under 3 hours." },
-      { time: "02:30", speaker: "Tim Hamons", title: "Sketch Your Game: Visual Tools to Design Engagement, Flow, and Player Motivation", type: "playshop", country: "Singapore",
+      { time: "02:00", speaker: "Amanda Friday", title: "The Mythic Method: A Magical Approach to Learning Design", type: "talk", country: "USA",
+        description: "Drawing from narrative psychology, the monomyth, and Sinospheric myths, Dr. Friday shows how story structures can be translated into practical learning design that drives real behavior change." },
+      { time: "02:30", speaker: "James Bishop and Jimbo Clark", title: "Exploration Experience", type: "experience", country: "Hong Kong" },
+      { time: "03:00", speaker: "Tim Hamons", title: "Sketch Your Game: Visual Tools to Design Engagement, Flow, and Player Motivation", type: "playshop", country: "Singapore",
         description: "Draw your way to better game design. Use simple visual frameworks to clarify player goals, storyboard learning journeys, and map engagement flow." },
       { time: "04:30", speaker: "Dannie Jeffries", title: "Māori-Centred Gamification: Small Shifts, Meaningful Differences", type: "talk", country: "New Zealand",
         description: "Discover how cultural worldviews shape gamified systems. Learn key Māori values and design principles that create more inclusive, impactful experiences." },
       { time: "05:00", speaker: "Beatrice Chu", title: "Bringing University Programs to Life Through Gamification", type: "talk", country: "Hong Kong",
-        description: "How one university onboarded 900 teaching assistants through playful, meaningful gamified programs. See real campus implementations in action." }
+        description: "See how HKUST uses gamification to drive faculty development, learner engagement, and institutional change at scale—with concrete design decisions and lessons learned, not surface-level gimmicks." }
     ]
   },
   {
@@ -59,15 +63,14 @@ const scheduleData = [
     host: "Moe Ash & Zunara Nauman",
     regions: "Middle East • South Asia • East Africa",
     sessions: [
-      { time: "06:00", speaker: "Moe Ash", title: "Intro Block", type: "intro", country: "UAE" },
+      { time: "06:00", speaker: "Moe Ash and Zunara Nauman", title: "Intro Block", type: "intro", country: "UAE" },
       { time: "06:30", speaker: "Ritika Datta", title: "How to Make Words Your Strongest Game Mechanic", type: "talk", country: "Singapore",
         description: "Words aren't just instructions—they're mechanics. Learn how language choices drive behavior change that lasts beyond the session." },
       { time: "07:00", speaker: "Rakshith Bhagavath", title: "Beads of Intent: A Decision Tool Rooted in Ancient Indian Insight", type: "playshop", country: "India",
         description: "Use a simple bead-based activity to uncover your decision-making patterns. Discover avoidance, impulse, and intention through play and reflection." },
       { time: "08:00", speaker: "Darwin Sy Antipolo", title: "WANTED: Games for Developing Future(s)-ready Leaders", type: "talk", country: "Philippines",
-        description: "Respond to the call! Explore how game principles and mechanics can build futures-thinking capabilities in leaders facing uncertainty." },
-      { time: "08:30", speaker: "Zunara Nauman", title: "Blitzscaling: When Speed Matters", type: "talk", country: "Pakistan",
-        description: "Learn how to launch small, useful learning experiences quickly and improve through short, focused cycles. Start with a single game loop that teaches one critical behavior, then expand only after it proves its value." },
+        description: "What if leaders could practice tough feedback conversations through play instead of pressure? Explore how a purpose-built board game turns one of leadership's most uncomfortable skills into a shared learning experience." },
+      { time: "08:30", speaker: "Zunara Nauman", title: "Exploration Experience", type: "experience", country: "Pakistan" },
       { time: "09:00", speaker: "Janet Livingstone", title: "Naming, Framing, and Gaming: The Multiplicity Inside", type: "talk", country: "USA/Slovakia",
         description: "Discover Internal Family Systems (IFS) as a gamified leadership development tool. Learn visualization techniques for exploring your inner multiplicity." },
       { time: "10:00", speaker: "Rihan Mustapha", title: "GameFrame in Action: Bringing Purpose, Play, and Progress to Adult Learning", type: "playshop", country: "Saudi Arabia",
@@ -89,11 +92,14 @@ const scheduleData = [
         description: "Transform learning through game-based dynamics. Experience the Octalysis Framework in action and apply gamification to your own professional challenges." },
       { time: "14:00", speaker: "Alina Tudorache", title: "The Gamification Layer Every Profitable DAO Needs in 2026", type: "talk", country: "Romania",
         description: "Most DAOs die of apathy, not tech failure. Discover the missing behavior layer that turns ghost-town communities into thriving ecosystems." },
-      { time: "14:30", speaker: "Cedric Pontet", title: "TBA", type: "talk", country: "France" },
+      { time: "14:30", speaker: "Michala Liavaag & Dr Ana Garner", title: "Throwdown: Cyber Security Incident Response Team Experience (CSIRTxp)", type: "experience", country: "" },
+      { time: "14:45", speaker: "Bernardo Letayf & Roman Rackwitz", title: "Exploration Experience", type: "experience", country: "Mexico/Germany" },
       { time: "15:00", speaker: "Claudio Guz", title: "Vibe Game Coding: Creating Games at the Speed of Imagination", type: "talk", country: "Argentina",
         description: "Create games through conversation, not code. Watch ideas become mechanics instantly through real-time AI collaboration." },
-      { time: "16:00", speaker: "Joshua Yavelberg", title: "The Clockwork Prototype Lab: Gamifying Be AI-gile", type: "playshop", country: "USA",
-        description: "Enter a steampunk-inspired design bay. Build a playable prototype in 90 minutes while learning the Be AI-gile framework through play." }
+      { time: "15:30", speaker: "Bernardo Letayf & Roman Rackwitz", title: "Exploration Experience", type: "experience", country: "Mexico/Germany" },
+      { time: "16:00", speaker: "David Chandross", title: "Gamified Problem-Based Learning in Compassion-Based Gameworlds", type: "talk", country: "Canada",
+        description: "Build problem-based learning for online training using AI prompts. Design gameworlds rooted in compassion research." },
+      { time: "17:00", speaker: "Cedric Pontet", title: "#play14 Exploration", type: "talk", country: "France" }
     ]
   },
   {
@@ -109,7 +115,8 @@ const scheduleData = [
       { time: "18:00", speaker: "Artrell Williams & Jazmin Webster", title: "Intro Block", type: "intro", country: "USA" },
       { time: "18:30", speaker: "Rebecca Arnett", title: "Hidden Gems: Free & Cheap Tools to Level Up Your Training", type: "playshop", country: "USA",
         description: "Stop paying for expensive platforms. Discover free game engines, design tools, and collaborative platforms that make gamification accessible to everyone." },
-      { time: "20:00", speaker: "Steve Abrams", title: "Making the Story Move Us: Connecting Story Archetypes to Game Mechanics", type: "playshop", country: "USA" },
+      { time: "20:00", speaker: "TBA", title: "Exploration Experience", type: "experience", country: "" },
+      { time: "20:30", speaker: "Steve Abrams", title: "Making the Story Move Us: Connecting Story Archetypes to the Most Effective Game Mechanics", type: "playshop", country: "USA" },
       { time: "21:30", speaker: "Sam Liberty", title: "Ethical Gamification", type: "talk", country: "USA",
         description: "When gamification crosses the line into manipulation, everyone loses. Learn the ETHIC framework for designing experiences that respect players." },
       { time: "22:00", speaker: "Bret Wardle", title: "Play with Purpose: Remembering Games Through Empathetic Notes", type: "playshop", country: "USA",
@@ -123,19 +130,20 @@ const scheduleData = [
     centralEnd: "1:00 AM",
     gmtStart: "2026-03-23T00:00:00Z",
     gmtEnd: "2026-03-23T06:00:00Z",
-    host: "Jimbo Clark",
+    host: "James Bishop and Elmer Lau",
     regions: "East Asia • Oceania",
     sessions: [
-      { time: "00:00", speaker: "Jimbo Clark", title: "Intro Block", type: "intro", country: "Australia" },
+      { time: "00:00", speaker: "James Bishop and Elmer Lau", title: "Intro Block", type: "intro", country: "USA" },
       { time: "00:30", speaker: "Carriann Lane", title: "Build It Live: Creating Simple Apps Without Writing Code", type: "playshop", country: "USA",
         description: "What if you could create and build an app in 90 minutes without writing code? Together, we'll build an accessible branching scenario you can deploy anywhere using free, simple tools." },
-      { time: "02:00", speaker: "Chuck Sigmund, Christian Gossan, Vaughn O'Leary", title: "Panel: Fund the Fun: Making the Business Case for Gamification", type: "panel", country: "USA",
-        description: "No matter how strong your learning design is, it won't go anywhere without funding. Panelists share real-world strategies for positioning gamification as a business investment." },
-      { time: "03:00", speaker: "Shireen Chua, PhD", title: "When Cultures Clash, Immunities Surface: Game-Based Action Inquiry for Adaptive Leadership", type: "talk", country: "New Zealand",
-        description: "Explore how game-based experiences reveal hidden commitments and cultural immunity to change. Design for breakthrough, not just engagement." },
-      { time: "04:00", speaker: "Meike Sauerwein", title: "From Farm to Fridge: The Milk Life Cycle Challenge", type: "game", country: "Hong Kong",
+      { time: "01:00", speaker: "Meike Sauerwein", title: "From Farm to Fridge: The Milk Life Cycle Challenge", type: "game", country: "Hong Kong",
         description: "Play a sustainability game that makes carbon accounting fun. Compete to design the lowest-impact milk production lifecycle using real data." },
-      { time: "05:00", speaker: "Maytwin Pitipornvivat", title: "The Premium Human Play: Gamification Design for 'Premium Human' Skill", type: "talk", country: "Thailand",
+      { time: "02:00", speaker: "Chuck Sigmund, Christian Gossan, Vaughn O'Leary", title: "Fund the Fun: Making the Business Case for Gamification", type: "panel", country: "USA",
+        description: "No matter how strong your learning design is, it won't go anywhere without funding. Panelists share real-world strategies for positioning gamification as a business investment." },
+      { time: "03:00", speaker: "James Bishop and Elmer Lau", title: "Exploration Experience", type: "experience", country: "USA" },
+      { time: "03:30", speaker: "Shireen Chua, PhD", title: "When Cultures Clash, Immunities Surface: Game-Based Action Inquiry for Adaptive Leadership", type: "talk", country: "New Zealand",
+        description: "Explore how game-based experiences reveal hidden commitments and cultural immunity to change. Design for breakthrough, not just engagement." },
+      { time: "04:30", speaker: "Maytwin Pitipornvivat", title: "The Premium Human Play: Gamification Design for 'Premium Human' Skill", type: "talk", country: "Thailand",
         description: "In the age of AI, being human has become premium. Explore design techniques for developing the 7 core human skills through gamification." }
     ]
   },
@@ -150,13 +158,16 @@ const scheduleData = [
     regions: "Middle East • South Asia • East Africa",
     sessions: [
       { time: "06:00", speaker: "Moe Ash & Ercan Altuğ Yılmaz", title: "Intro Block", type: "intro", country: "UAE/Türkiye" },
-      { time: "06:30", speaker: "Carol Lim", title: "When Axiom Walks Into a Library: Reimagining the Futures of Learning Ecosystems through Play", type: "talk", country: "Singapore",
+      { time: "06:30", speaker: "Carol Lim", title: "Reimagining the Futures of Learning Ecosystems through Play", type: "talk", country: "Singapore",
         description: "What if gamified learning isn't about adding mechanics, but reimagining spaces where learning happens? A foresight practitioner's perspective." },
       { time: "07:00", speaker: "Sufiz Suffian", title: "The Hidden System in Play", type: "talk", country: "Malaysia",
         description: "Every game contains an underlying system that shapes what players learn, feel, and do. Discover the invisible architecture of gamified experiences." },
-      { time: "08:00", speaker: "Namitha Vijayakumar", title: "Designing Card Games for Learning", type: "talk", country: "India",
-        description: "From engineer to behavioral skills trainer—learn practical techniques for designing card-based learning games." },
-      { time: "09:00", speaker: "Joris Beerda", title: "TBA", type: "talk", country: "Netherlands" },
+      { time: "08:00", speaker: "Snjezana Slabek", title: "Throwdown: CogFactory: From Chaos to Clarity with Industrial AI", type: "experience", country: "" },
+      { time: "08:15", speaker: "Moe Ash and Ercan Altuğ Yılmaz", title: "Exploration Experience", type: "experience", country: "UAE/Türkiye" },
+      { time: "08:30", speaker: "Namitha Vijayakumar", title: "From Questionnaires to Quests: Rethinking Personality Assessments", type: "talk", country: "India",
+        description: "Step into a gamified Everest expedition where every decision reveals personality insights—not through questionnaires, but through lived moments of pressure and uncertainty." },
+      { time: "09:30", speaker: "Jolina Kahn", title: "Throwdown: Monsters and Heroes", type: "experience", country: "" },
+      { time: "09:45", speaker: "Moe Ash and Kerem Yazici", title: "Exploration Experience", type: "experience", country: "" },
       { time: "10:00", speaker: "Bhaskar Thyagarajan", title: "Don't Wing It! When Games Tell the Truth: Data-based Debriefing for High-Impact Behavioral Learning", type: "playshop", country: "India",
         description: "Move beyond subjective facilitation. Learn breakthrough techniques for data-driven debriefing that proves learning impact." }
     ]
@@ -172,14 +183,16 @@ const scheduleData = [
     regions: "Europe • Americas • Africa",
     sessions: [
       { time: "12:00", speaker: "Isobel Wallace", title: "Intro Block", type: "intro", country: "UK" },
-      { time: "12:30", speaker: "Monica Cornetti, Marigo Raftopoulos, David Metcalf, Rasha Morsi", title: "Panel: AI Hardcoded Bias: UX, AI, and the Human Cost of Design", type: "panel", country: "Global",
+      { time: "12:30", speaker: "Monica Cornetti, Marigo Raftopoulos, David Metcalf, Rasha Morsi", title: "AI Hardcoded Bias: UX, AI, and the Human Cost of Design", type: "panel", country: "Global",
         description: "This panel examines how algorithmic systems in healthcare, education, and the workplace often reinforce gendered assumptions, shaping who benefits, who is seen, and who is left out." },
-      { time: "13:30", speaker: "Isobel Wallace", title: "ThinkingCap", type: "sponsor", country: "UK" },
+      { time: "13:30", speaker: "Bálint Koller", title: "Throwdown: Stakeholder Quest: Leveling Up Digital Learning at Grundfos", type: "experience", country: "" },
+      { time: "13:45", speaker: "Isobel Wallace", title: "Exploration Experience", type: "experience", country: "UK" },
       { time: "14:00", speaker: "Ayman Elarby", title: "Feedback Marvels", type: "talk", country: "Egypt",
         description: "Give and receive professional feedback through a board game designed with game-based learning principles." },
-      { time: "15:00", speaker: "Darryn Van Den Berg", title: "TBA", type: "talk", country: "South Africa" },
-      { time: "15:30", speaker: "Julia Allen & Frank Parker", title: "Worldbuilding in GoBrunch: Enhancing User Experiences Through Design Concepts", type: "playshop", country: "USA",
-        description: "Turn virtual platforms into story-rich environments. Hands-on exploration of world-building that surprises and delights." }
+      { time: "15:00", speaker: "Isobel Wallace", title: "Exploration Experience", type: "experience", country: "UK" },
+      { time: "15:30", speaker: "Darryn Van Den Berg", title: "Embedding the Learning AFTER Training with Behaviour Economics", type: "talk", country: "South Africa" },
+      { time: "16:00", speaker: "Joshua Yavelberg", title: "The Clockwork Prototype Lab: Gamifying Be AI-gile", type: "playshop", country: "USA",
+        description: "Enter a steampunk-inspired design bay. Build a playable prototype in 90 minutes while learning the Be AI-gile framework through play." }
     ]
   },
   {
@@ -195,12 +208,14 @@ const scheduleData = [
       { time: "18:00", speaker: "Ginnie Cappozzi", title: "Intro Block", type: "intro", country: "USA" },
       { time: "18:30", speaker: "Jesse Sanderson", title: "We Speak! Addressing Classroom Language Barriers in Under-Resourced Global Regions through Game-Based Learning", type: "talk", country: "USA",
         description: "A student project that became a movement. Learn how game-based learning addresses dropout rates caused by language barriers in Tanzania." },
-      { time: "19:00", speaker: "David Chandross", title: "Gamified Problem-Based Learning in Compassion-Based Gameworlds", type: "talk", country: "Canada",
-        description: "Build problem-based learning for online training using AI prompts. Design gameworlds rooted in compassion research." },
-      { time: "20:30", speaker: "Javier Velasquez", title: "100 Victory Points for Designing Great Point Systems that Teach!", type: "playshop", country: "Colombia",
+      { time: "19:00", speaker: "Javier Velasquez", title: "100 Victory Points for Designing Great Point Systems that Teach!", type: "playshop", country: "Colombia",
         description: "Identify point types, understand their psychological value, and design meaningful point systems that actually drive learning." },
-      { time: "22:30", speaker: "Keith Lillico", title: "\"Tell Me Why\": What Toddlers, Boy Bands, and Learners Teach Us About Motivation", type: "talk", country: "Canada",
-        description: "Examine the underlying ecosystem of human motivation that shapes engagement across very different contexts, from early learning to enterprise compliance. Learn a practical framework for identifying the often-hidden motivations of an audience." }
+      { time: "20:30", speaker: "Ginnie Cappozzi", title: "Exploration Experience", type: "experience", country: "USA" },
+      { time: "21:00", speaker: "Keith Lillico", title: "\"Tell Me Why\": What Toddlers, Boy Bands, and Learners Teach Us About Motivation", type: "talk", country: "Canada",
+        description: "Examine the underlying ecosystem of human motivation that shapes engagement across very different contexts, from early learning to enterprise compliance. Learn a practical framework for identifying the often-hidden motivations of an audience." },
+      { time: "21:30", speaker: "Julia Allen & Frank Parker", title: "Worldbuilding in Rippily: Enhancing User Experiences Through Design Concepts", type: "playshop", country: "USA",
+        description: "Turn virtual platforms into story-rich environments. Hands-on exploration of world-building that surprises and delights." },
+      { time: "23:00", speaker: "Sententia Team", title: "Closing Celebration", type: "experience", country: "" }
     ]
   }
 ];
@@ -230,7 +245,8 @@ function getTypeBadge(type) {
     talk: { bg: 'bg-sky-700', text: 'text-white', label: 'Talk' },
     game: { bg: 'bg-emerald-700', text: 'text-white', label: 'Game' },
     sponsor: { bg: 'bg-orange-700', text: 'text-white', label: 'Sponsor' },
-    intro: { bg: 'bg-slate-600', text: 'text-white', label: 'Welcome' }
+    intro: { bg: 'bg-slate-600', text: 'text-white', label: 'Welcome' },
+    experience: { bg: 'bg-teal-700', text: 'text-white', label: 'Experience' }
   };
   return styles[type] || styles.talk;
 }
@@ -439,11 +455,11 @@ export default function GamiCon48VLanding() {
               <p className="text-slate-300">Global Blocks</p>
             </div>
             <div className="bg-slate-700/50 rounded-xl p-6">
-              <div className="text-4xl font-bold text-amber-400 mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>35+</div>
+              <div className="text-4xl font-bold text-amber-400 mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>55</div>
               <p className="text-slate-300">Sessions</p>
             </div>
             <div className="bg-slate-700/50 rounded-xl p-6">
-              <div className="text-4xl font-bold text-amber-400 mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>30+</div>
+              <div className="text-4xl font-bold text-amber-400 mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>59</div>
               <p className="text-slate-300">Speakers</p>
             </div>
             <div className="bg-slate-700/50 rounded-xl p-6">
@@ -562,12 +578,28 @@ export default function GamiCon48VLanding() {
                             <span className={`md:hidden px-2 py-0.5 ${badge.bg} ${badge.text} text-xs font-semibold rounded-full`}>
                               {badge.label}
                             </span>
+                            {session.additionalType && (() => {
+                              const addBadge = getTypeBadge(session.additionalType);
+                              return (
+                                <span className={`md:hidden px-2 py-0.5 ${addBadge.bg} ${addBadge.text} text-xs font-semibold rounded-full`}>
+                                  {addBadge.label}
+                                </span>
+                              );
+                            })()}
                           </div>
                           <div className="flex-grow">
                             <div className="hidden md:flex flex-wrap items-center gap-2 mb-2">
                               <span className={`px-3 py-1 ${badge.bg} ${badge.text} text-xs font-semibold rounded-full`}>
                                 {badge.label}
                               </span>
+                              {session.additionalType && (() => {
+                                const addBadge = getTypeBadge(session.additionalType);
+                                return (
+                                  <span className={`px-3 py-1 ${addBadge.bg} ${addBadge.text} text-xs font-semibold rounded-full`}>
+                                    {addBadge.label}
+                                  </span>
+                                );
+                              })()}
                               {session.country && (
                                 <span className="text-slate-300 text-sm">
                                   {session.country}
