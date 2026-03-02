@@ -272,7 +272,7 @@ function getSessionEndTime(session, sessionIndex, block) {
   return new Date(block.gmtEnd);
 }
 
-// Generate ICS calendar file for a session
+// Generate ICS calendar file for a session (Apple Calendar & Outlook)
 function generateICS(session, sessionIndex, block) {
   const startTime = getSessionStartTime(session, block);
   const endTime = getSessionEndTime(session, sessionIndex, block);
@@ -320,15 +320,52 @@ function generateICS(session, sessionIndex, block) {
   URL.revokeObjectURL(url);
 }
 
+// Generate Google Calendar URL for a session
+function getGoogleCalendarUrl(session, sessionIndex, block) {
+  const startTime = getSessionStartTime(session, block);
+  const endTime = getSessionEndTime(session, sessionIndex, block);
+  
+  const formatGoogleDate = (date) => {
+    return date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  };
+  
+  const title = encodeURIComponent(`GamiCon48V: ${session.title}`);
+  const details = encodeURIComponent([
+    `Speaker: ${session.speaker}`,
+    session.country ? `Location: ${session.country}` : '',
+    '',
+    session.description || '',
+    '',
+    'GamiCon48V 2026 - 48 Hours of Playful Learning',
+    'https://gamicon48v-landing.vercel.app'
+  ].filter(Boolean).join('\n'));
+  
+  const dates = `${formatGoogleDate(startTime)}/${formatGoogleDate(endTime)}`;
+  
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}`;
+}
+
 export default function GamiCon48VLanding() {
   const [showSententralTime, setShowSententralTime] = useState(false);
   const [userTimezone, setUserTimezone] = useState('');
   const [expandedBlock, setExpandedBlock] = useState(null);
+  const [calendarMenuOpen, setCalendarMenuOpen] = useState(null);
 
   useEffect(() => {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
     setUserTimezone(tz.replace(/_/g, ' '));
   }, []);
+
+  // Close calendar menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (calendarMenuOpen && !e.target.closest('.calendar-dropdown')) {
+        setCalendarMenuOpen(null);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [calendarMenuOpen]);
 
   const getDisplayTime = (gmtTime, block) => {
     if (showSententralTime) {
@@ -565,6 +602,7 @@ export default function GamiCon48VLanding() {
                 <div className="border-t border-slate-700/50">
                   {block.sessions.map((session, idx) => {
                     const badge = getTypeBadge(session.type);
+                    const menuId = `block-${block.block}-${idx}`;
                     return (
                       <div 
                         key={idx} 
@@ -618,17 +656,71 @@ export default function GamiCon48VLanding() {
                                 {session.description}
                               </p>
                             )}
-                            {/* Add to Calendar Button */}
-                            <button
-                              onClick={() => generateICS(session, idx, block)}
-                              className="mt-3 w-full sm:w-auto inline-flex items-center justify-center sm:justify-start gap-2 px-4 py-3 sm:py-2.5 text-sm text-slate-300 bg-slate-700/50 hover:bg-slate-600 active:bg-slate-500 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-800 min-h-[44px]"
-                              aria-label={`Add ${session.title} to calendar`}
-                            >
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                              </svg>
-                              Add to Calendar
-                            </button>
+                            {/* Add to Calendar Dropdown */}
+                            <div className="mt-3 relative calendar-dropdown">
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setCalendarMenuOpen(calendarMenuOpen === menuId ? null : menuId);
+                                }}
+                                className="w-full sm:w-auto inline-flex items-center justify-center sm:justify-start gap-2 px-4 py-3 sm:py-2.5 text-sm text-slate-300 bg-slate-700/50 hover:bg-slate-600 active:bg-slate-500 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-800 min-h-[44px]"
+                                aria-expanded={calendarMenuOpen === menuId}
+                                aria-haspopup="true"
+                                aria-label={`Add ${session.title} to calendar`}
+                              >
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                                Add to Calendar
+                                <svg className={`w-4 h-4 transition-transform ${calendarMenuOpen === menuId ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                </svg>
+                              </button>
+                              {calendarMenuOpen === menuId && (
+                                <div className="absolute left-0 mt-2 w-56 bg-slate-800 border border-slate-600 rounded-lg shadow-xl z-50" role="menu">
+                                  <a
+                                    href={getGoogleCalendarUrl(session, idx, block)}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-3 px-4 py-3 text-sm text-slate-300 hover:bg-slate-700 active:bg-slate-600 rounded-t-lg transition-colors min-h-[44px]"
+                                    role="menuitem"
+                                    onClick={() => setCalendarMenuOpen(null)}
+                                  >
+                                    <svg className="w-5 h-5 text-red-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                                    </svg>
+                                    Google Calendar
+                                    <span className="sr-only">(opens in new tab)</span>
+                                  </a>
+                                  <button
+                                    onClick={() => {
+                                      generateICS(session, idx, block);
+                                      setCalendarMenuOpen(null);
+                                    }}
+                                    className="flex items-center gap-3 w-full px-4 py-3 text-sm text-slate-300 hover:bg-slate-700 active:bg-slate-600 transition-colors min-h-[44px] text-left"
+                                    role="menuitem"
+                                  >
+                                    <svg className="w-5 h-5 text-blue-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                      <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/>
+                                    </svg>
+                                    Apple Calendar (.ics)
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      generateICS(session, idx, block);
+                                      setCalendarMenuOpen(null);
+                                    }}
+                                    className="flex items-center gap-3 w-full px-4 py-3 text-sm text-slate-300 hover:bg-slate-700 active:bg-slate-600 rounded-b-lg transition-colors min-h-[44px] text-left"
+                                    role="menuitem"
+                                  >
+                                    <svg className="w-5 h-5 text-sky-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                      <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/>
+                                    </svg>
+                                    Outlook (.ics)
+                                  </button>
+                                </div>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </div>
