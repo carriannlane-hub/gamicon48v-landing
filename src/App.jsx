@@ -69,7 +69,7 @@ const scheduleData = [
       { time: "07:00", speaker: "Rakshith Bhagavath", title: "Beads of Intent: A Decision Tool Rooted in Ancient Indian Insight", type: "playshop", country: "India",
         description: "Use a simple bead-based activity to uncover your decision-making patterns. Discover avoidance, impulse, and intention through play and reflection." },
       { time: "08:00", speaker: "Darwin Sy Antipolo", title: "WANTED: Games for Developing Future(s)-ready Leaders", type: "talk", country: "Philippines",
-        description: "What if leaders could practice tough feedback conversations through play instead of pressure? Explore how a purpose-built board game turns one of leadership's most uncomfortable skills into a shared learning experience." },
+        description: "How do you teach people to think about futures that haven't happened yet? Through play. Futures Thinking and Strategic Foresight is an emerging discipline that builds "futures literacy"—the ability to imagine possibilities, anticipate change, and make better decisions today. In this hands-on session, you'll contribute game ideas and explore proven game mechanics that develop these capabilities." },
       { time: "08:30", speaker: "Zunara Nauman", title: "Exploration Experience", type: "experience", country: "Pakistan" },
       { time: "09:00", speaker: "Janet Livingstone", title: "Naming, Framing, and Gaming: The Multiplicity Inside", type: "talk", country: "USA/Slovakia",
         description: "Discover Internal Family Systems (IFS) as a gamified leadership development tool. Learn visualization techniques for exploring your inner multiplicity." },
