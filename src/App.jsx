@@ -109,7 +109,7 @@ const scheduleData = [
     centralEnd: "7:00 PM",
     gmtStart: "2026-03-22T18:00:00Z",
     gmtEnd: "2026-03-23T00:00:00Z",
-    host: "TBA",
+    host: "Robert Feeney",
     regions: "Western North America • Mexico • Central America",
     sessions: [
       { time: "18:00", speaker: "Artrell Williams & Jazmin Webster", title: "Intro Block", type: "intro", country: "USA" },
@@ -179,7 +179,7 @@ const scheduleData = [
     centralEnd: "1:00 PM",
     gmtStart: "2026-03-23T12:00:00Z",
     gmtEnd: "2026-03-23T18:00:00Z",
-    host: "Isobel Wallace (Thinking Cap)",
+    host: "Isobel Wallace (Thinking Cap) & Chuck Sigmond",
     regions: "Europe • Americas • Africa",
     sessions: [
       { time: "12:00", speaker: "Isobel Wallace", title: "Intro Block", type: "intro", country: "UK" },
