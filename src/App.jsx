@@ -37,7 +37,8 @@ const scheduleData = [
     regions: "East Asia • Southeast Asia • Oceania",
     sessions: [
       { time: "00:00", speaker: "James Bishop and Jimbo Clark", title: "Welcome to GamiCon48V 2026!", type: "intro", country: "Hong Kong" },
-      { time: "00:30", speaker: "Monica Cornetti", title: "F*ck Average", type: "keynote", additionalType: "talk", country: "USA" },
+      { time: "00:30", speaker: "Monica Cornetti", title: "F*ck Average", type: "keynote", additionalType: "talk", country: "USA",
+        description: "This keynote is for the people who have felt the friction—the ones who tried to raise the bar in corporate training and were met with blank stares, outdated systems, or quiet resistance. It's a clear-eyed call to reject mediocrity in how we design, deliver, and defend meaningful learning. Takeaway: Average is a choice. So is doing something better." },
       { time: "01:00", speaker: "Bernardo Letayf", title: "BlueRabbit", type: "sponsor", country: "Mexico", description: "Instructions for Using the Gamified Conference App BlueRabbit" },
       { time: "01:15", speaker: "James Bishop", title: "Crossroads: Introduction to the Conference Charity", type: "experience", country: "Hong Kong" },
       { time: "01:30", speaker: "James Bishop", title: "How to Get Away with Murder at a Conference!", type: "talk", country: "Hong Kong", 
@@ -50,7 +51,8 @@ const scheduleData = [
       { time: "04:30", speaker: "Dannie Jeffries", title: "Māori-Centred Gamification: Small Shifts, Meaningful Differences", type: "talk", country: "New Zealand",
         description: "Discover how cultural worldviews shape gamified systems. Learn key Māori values and design principles that create more inclusive, impactful experiences." },
       { time: "05:00", speaker: "Beatrice Chu", title: "Bringing University Programs to Life Through Gamification", type: "talk", country: "Hong Kong",
-        description: "See how HKUST uses gamification to drive faculty development, learner engagement, and institutional change at scale—with concrete design decisions and lessons learned, not surface-level gimmicks." }
+        description: "See how HKUST uses gamification to drive faculty development, learner engagement, and institutional change at scale—with concrete design decisions and lessons learned, not surface-level gimmicks." },
+      { time: "05:30", speaker: "James Bishop and Jimbo Clark", title: "Block 1 Wrap-up", type: "experience", country: "Hong Kong" }
     ]
   },
   {
@@ -69,12 +71,13 @@ const scheduleData = [
       { time: "07:00", speaker: "Rakshith Bhagavath", title: "Beads of Intent: A Decision Tool Rooted in Ancient Indian Insight", type: "playshop", country: "India",
         description: "Use a simple bead-based activity to uncover your decision-making patterns. Discover avoidance, impulse, and intention through play and reflection." },
       { time: "08:00", speaker: "Darwin Sy Antipolo", title: "WANTED: Games for Developing Future(s)-ready Leaders", type: "talk", country: "Philippines",
-        description: "How do you teach people to think about futures that haven't happened yet? Through play. Futures Thinking and Strategic Foresight is an emerging discipline that builds "futures literacy"—the ability to imagine possibilities, anticipate change, and make better decisions today. In this hands-on session, you'll contribute game ideas and explore proven game mechanics that develop these capabilities." },
-      { time: "08:30", speaker: "Zunara Nauman", title: "Exploration Experience", type: "experience", country: "Pakistan" },
+        description: "How do you teach people to think about futures that haven't happened yet? Through play. Futures Thinking and Strategic Foresight is an emerging discipline that builds 'futures literacy'—the ability to imagine possibilities, anticipate change, and make better decisions today. In this hands-on session, you'll contribute game ideas and explore proven game mechanics that develop these capabilities." },
+      { time: "08:30", speaker: "Zunara Nauman and Moe Ash", title: "Exploration Experience", type: "experience", country: "Pakistan" },
       { time: "09:00", speaker: "Janet Livingstone", title: "Naming, Framing, and Gaming: The Multiplicity Inside", type: "talk", country: "USA/Slovakia",
         description: "Discover Internal Family Systems (IFS) as a gamified leadership development tool. Learn visualization techniques for exploring your inner multiplicity." },
       { time: "10:00", speaker: "Rihan Mustapha", title: "GameFrame in Action: Bringing Purpose, Play, and Progress to Adult Learning", type: "playshop", country: "Saudi Arabia",
-        description: "Experience the GameFrame model firsthand. Blend coaching, gamification, and emotional intelligence to create meaningful adult learning." }
+        description: "Experience the GameFrame model firsthand. Blend coaching, gamification, and emotional intelligence to create meaningful adult learning." },
+      { time: "11:30", speaker: "Moe Ash and Zunara Nauman", title: "Block 2 Wrap-up", type: "experience", country: "UAE" }
     ]
   },
   {
@@ -97,9 +100,11 @@ const scheduleData = [
       { time: "15:00", speaker: "Claudio Guz", title: "Vibe Game Coding: Creating Games at the Speed of Imagination", type: "talk", country: "Argentina",
         description: "Create games through conversation, not code. Watch ideas become mechanics instantly through real-time AI collaboration." },
       { time: "15:30", speaker: "Bernardo Letayf & Roman Rackwitz", title: "Exploration Experience", type: "experience", country: "Mexico/Germany" },
-      { time: "16:00", speaker: "David Chandross", title: "Gamified Problem-Based Learning in Compassion-Based Gameworlds", type: "talk", country: "Canada",
-        description: "Build problem-based learning for online training using AI prompts. Design gameworlds rooted in compassion research." },
-      { time: "17:00", speaker: "Cedric Pontet", title: "#play14 Exploration", type: "talk", country: "France" }
+      { time: "16:00", speaker: "David Chandross and Shoshana Helfenbaum", title: "Panel: Gamified Problem-Based Learning in Compassion-Based Gameworlds", type: "panel", country: "Canada",
+        description: "Explore how emerging AI tools and compassionate design can create online learning experiences that feel human, purposeful, and engaging. Learn to design virtual characters that feel alive and relational." },
+      { time: "17:00", speaker: "Cedric Pontet", title: "Growing a Global Playful Community: The Story of #play14 and Lessons for Sustainable, Organic Growth", type: "talk", country: "Luxembourg",
+        description: "From a small idea in Luxembourg to a thriving international community, #play14 grew because people chose to participate. Explore design principles for sustainable community growth." },
+      { time: "17:30", speaker: "Bernardo Letayf and Roman Rackwitz", title: "Block 3 Wrap-up", type: "experience", country: "Mexico/Germany" }
     ]
   },
   {
@@ -112,15 +117,18 @@ const scheduleData = [
     host: "Robert Feeney",
     regions: "Western North America • Mexico • Central America",
     sessions: [
-      { time: "18:00", speaker: "Artrell Williams & Jazmin Webster", title: "Intro Block", type: "intro", country: "USA" },
+      { time: "18:00", speaker: "Robert Feeney", title: "Intro Block", type: "intro", country: "USA" },
       { time: "18:30", speaker: "Rebecca Arnett", title: "Hidden Gems: Free & Cheap Tools to Level Up Your Training", type: "playshop", country: "USA",
         description: "Stop paying for expensive platforms. Discover free game engines, design tools, and collaborative platforms that make gamification accessible to everyone." },
-      { time: "20:00", speaker: "TBA", title: "Exploration Experience", type: "experience", country: "" },
-      { time: "20:30", speaker: "Steve Abrams", title: "Making the Story Move Us: Connecting Story Archetypes to the Most Effective Game Mechanics", type: "playshop", country: "USA" },
+      { time: "20:00", speaker: "Fiona Gironella", title: "Throwdown: Border Security Challenge!", type: "experience", country: "" },
+      { time: "20:15", speaker: "Robert Feeney", title: "Exploration Experience", type: "experience", country: "USA" },
+      { time: "20:30", speaker: "Steve Abrams", title: "Making the Story Move Us: Connecting Story Archetypes to the Most Effective Game Mechanics", type: "talk", country: "USA",
+        description: "Discover how classic narrative archetypes can be intentionally integrated into gamified learning. Learn a practical framework for matching story structures with game mechanics to create more engaging experiences." },
       { time: "21:30", speaker: "Sam Liberty", title: "Ethical Gamification", type: "talk", country: "USA",
         description: "When gamification crosses the line into manipulation, everyone loses. Learn the ETHIC framework for designing experiences that respect players." },
       { time: "22:00", speaker: "Bret Wardle", title: "Play with Purpose: Remembering Games Through Empathetic Notes", type: "playshop", country: "USA",
-        description: "Bridge experience and insight. Learn a structured note-taking approach to capture emotional responses and synthesize them into better designs." }
+        description: "Bridge experience and insight. Learn a structured note-taking approach to capture emotional responses and synthesize them into better designs." },
+      { time: "23:30", speaker: "Robert Feeney", title: "Block 4 Wrap-up", type: "experience", country: "USA" }
     ]
   },
   {
@@ -136,15 +144,14 @@ const scheduleData = [
       { time: "00:00", speaker: "James Bishop and Elmer Lau", title: "Intro Block", type: "intro", country: "USA" },
       { time: "00:30", speaker: "Carriann Lane", title: "Build It Live: Creating Simple Apps Without Writing Code", type: "playshop", country: "USA",
         description: "What if you could create and build an app in 90 minutes without writing code? Together, we'll build an accessible branching scenario you can deploy anywhere using free, simple tools." },
-      { time: "01:00", speaker: "Meike Sauerwein", title: "From Farm to Fridge: The Milk Life Cycle Challenge", type: "game", country: "Hong Kong",
-        description: "Play a sustainability game that makes carbon accounting fun. Compete to design the lowest-impact milk production lifecycle using real data." },
       { time: "02:00", speaker: "Chuck Sigmund, Christian Gossan, Vaughn O'Leary", title: "Fund the Fun: Making the Business Case for Gamification", type: "panel", country: "USA",
         description: "No matter how strong your learning design is, it won't go anywhere without funding. Panelists share real-world strategies for positioning gamification as a business investment." },
-      { time: "03:00", speaker: "James Bishop and Elmer Lau", title: "Exploration Experience", type: "experience", country: "USA" },
+      { time: "03:00", speaker: "Elmer Lau", title: "Exploration Experience", type: "experience", country: "Hong Kong" },
       { time: "03:30", speaker: "Shireen Chua, PhD", title: "When Cultures Clash, Immunities Surface: Game-Based Action Inquiry for Adaptive Leadership", type: "talk", country: "New Zealand",
         description: "Explore how game-based experiences reveal hidden commitments and cultural immunity to change. Design for breakthrough, not just engagement." },
       { time: "04:30", speaker: "Maytwin Pitipornvivat", title: "The Premium Human Play: Gamification Design for 'Premium Human' Skill", type: "talk", country: "Thailand",
-        description: "In the age of AI, being human has become premium. Explore design techniques for developing the 7 core human skills through gamification." }
+        description: "In the age of AI, being human has become premium. Explore design techniques for developing the 7 core human skills through gamification." },
+      { time: "05:30", speaker: "Elmer Lau", title: "Block 5 Wrap-up", type: "experience", country: "Hong Kong" }
     ]
   },
   {
@@ -163,13 +170,13 @@ const scheduleData = [
       { time: "07:00", speaker: "Sufiz Suffian", title: "The Hidden System in Play", type: "talk", country: "Malaysia",
         description: "Every game contains an underlying system that shapes what players learn, feel, and do. Discover the invisible architecture of gamified experiences." },
       { time: "08:00", speaker: "Snjezana Slabek", title: "Throwdown: CogFactory: From Chaos to Clarity with Industrial AI", type: "experience", country: "" },
-      { time: "08:15", speaker: "Moe Ash and Ercan Altuğ Yılmaz", title: "Exploration Experience", type: "experience", country: "UAE/Türkiye" },
+      { time: "08:15", speaker: "Jolina Kahn", title: "Throwdown: Monsters and Heroes", type: "experience", country: "" },
       { time: "08:30", speaker: "Namitha Vijayakumar", title: "From Questionnaires to Quests: Rethinking Personality Assessments", type: "talk", country: "India",
         description: "Step into a gamified Everest expedition where every decision reveals personality insights—not through questionnaires, but through lived moments of pressure and uncertainty." },
-      { time: "09:30", speaker: "Jolina Kahn", title: "Throwdown: Monsters and Heroes", type: "experience", country: "" },
-      { time: "09:45", speaker: "Moe Ash and Kerem Yazici", title: "Exploration Experience", type: "experience", country: "" },
-      { time: "10:00", speaker: "Bhaskar Thyagarajan", title: "Don't Wing It! When Games Tell the Truth: Data-based Debriefing for High-Impact Behavioral Learning", type: "playshop", country: "India",
-        description: "Move beyond subjective facilitation. Learn breakthrough techniques for data-driven debriefing that proves learning impact." }
+      { time: "09:30", speaker: "Moe Ash, Kerem Yazici, and Ercan Altuğ Yılmaz", title: "Panel: What's New and in the Future for Gamification", type: "panel", country: "UAE/Türkiye" },
+      { time: "10:15", speaker: "Bhaskar Thyagarajan", title: "Don't Wing It! When Games Tell the Truth: Data-based Debriefing for High-Impact Behavioral Learning", type: "playshop", country: "India",
+        description: "Move beyond subjective facilitation. Learn breakthrough techniques for data-driven debriefing that proves learning impact." },
+      { time: "11:45", speaker: "Moe Ash and Kerem Yazici", title: "Block 6 Wrap-up", type: "experience", country: "UAE" }
     ]
   },
   {
@@ -190,9 +197,11 @@ const scheduleData = [
       { time: "14:00", speaker: "Ayman Elarby", title: "Feedback Marvels", type: "talk", country: "Egypt",
         description: "Give and receive professional feedback through a board game designed with game-based learning principles." },
       { time: "15:00", speaker: "Isobel Wallace", title: "Exploration Experience", type: "experience", country: "UK" },
-      { time: "15:30", speaker: "Darryn Van Den Berg", title: "Embedding the Learning AFTER Training with Behaviour Economics", type: "talk", country: "South Africa" },
+      { time: "15:30", speaker: "Darryn Van Den Berg", title: "Embedding the Learning AFTER Training with Behaviour Economics", type: "talk", country: "South Africa",
+        description: "Training fills knowledge gaps, but real impact happens when the workplace environment supports behavior change. Explore the ADAPT model for extending learning beyond the classroom." },
       { time: "16:00", speaker: "Joshua Yavelberg", title: "The Clockwork Prototype Lab: Gamifying Be AI-gile", type: "playshop", country: "USA",
-        description: "Enter a steampunk-inspired design bay. Build a playable prototype in 90 minutes while learning the Be AI-gile framework through play." }
+        description: "Enter a steampunk-inspired design bay. Build a playable prototype in 90 minutes while learning the Be AI-gile framework through play." },
+      { time: "17:30", speaker: "Isobel Wallace", title: "Block 7 Wrap-up", type: "experience", country: "UK" }
     ]
   },
   {
@@ -202,19 +211,19 @@ const scheduleData = [
     centralEnd: "7:00 PM",
     gmtStart: "2026-03-23T18:00:00Z",
     gmtEnd: "2026-03-24T00:00:00Z",
-    host: "Ginnie Cappozzi",
+    host: "Ginnie Cappozzi and Casey Webster",
     regions: "Western North America • Mexico • Central America • Oceania",
     sessions: [
-      { time: "18:00", speaker: "Ginnie Cappozzi", title: "Intro Block", type: "intro", country: "USA" },
+      { time: "18:00", speaker: "Ginnie Cappozzi and Casey Webster", title: "Intro Block", type: "intro", country: "USA" },
       { time: "18:30", speaker: "Jesse Sanderson", title: "We Speak! Addressing Classroom Language Barriers in Under-Resourced Global Regions through Game-Based Learning", type: "talk", country: "USA",
         description: "A student project that became a movement. Learn how game-based learning addresses dropout rates caused by language barriers in Tanzania." },
       { time: "19:00", speaker: "Javier Velasquez", title: "100 Victory Points for Designing Great Point Systems that Teach!", type: "playshop", country: "Colombia",
         description: "Identify point types, understand their psychological value, and design meaningful point systems that actually drive learning." },
-      { time: "20:30", speaker: "Ginnie Cappozzi", title: "Exploration Experience", type: "experience", country: "USA" },
-      { time: "21:00", speaker: "Keith Lillico", title: "\"Tell Me Why\": What Toddlers, Boy Bands, and Learners Teach Us About Motivation", type: "talk", country: "Canada",
-        description: "Examine the underlying ecosystem of human motivation that shapes engagement across very different contexts, from early learning to enterprise compliance. Learn a practical framework for identifying the often-hidden motivations of an audience." },
-      { time: "21:30", speaker: "Julia Allen & Frank Parker", title: "Worldbuilding in Rippily: Enhancing User Experiences Through Design Concepts", type: "playshop", country: "USA",
+      { time: "20:30", speaker: "Ginnie Cappozzi and Monica Cornetti", title: "Throwdown Showcase Awards", type: "experience", country: "USA" },
+      { time: "21:00", speaker: "Julia Allen and Frank Parker", title: "Worldbuilding in Rippily: Enhancing User Experiences Through Design Concepts", type: "playshop", country: "USA",
         description: "Turn virtual platforms into story-rich environments. Hands-on exploration of world-building that surprises and delights." },
+      { time: "22:30", speaker: "Keith Lillico", title: "\"Tell Me Why\": What Toddlers, Boy Bands, and Learners Teach Us About Motivation", type: "talk", country: "Canada",
+        description: "Examine the underlying ecosystem of human motivation that shapes engagement across very different contexts, from early learning to enterprise compliance. Learn a practical framework for identifying the often-hidden motivations of an audience." },
       { time: "23:00", speaker: "Sententia Team", title: "Closing Celebration", type: "experience", country: "" }
     ]
   }
