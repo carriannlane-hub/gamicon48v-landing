@@ -310,7 +310,7 @@ function getTypeBadge(type) {
     keynote: { bg: 'bg-red-700', text: 'text-white', label: 'Keynote' },
     panel: { bg: 'bg-purple-700', text: 'text-white', label: 'Panel' },
     talk: { bg: 'bg-sky-700', text: 'text-white', label: 'Talk' },
-    game: { bg: 'bg-emerald-700', text: 'text-white', label: 'Game' },
+    game: { bg: '', text: 'text-white', label: 'Game', style: { backgroundColor: '#047857' } },
     sponsor: { bg: 'bg-orange-700', text: 'text-white', label: 'Sponsor' },
     intro: { bg: 'bg-slate-600', text: 'text-white', label: 'Welcome' },
     experience: { bg: 'bg-teal-700', text: 'text-white', label: 'Experience' }
@@ -688,13 +688,13 @@ export default function GamiCon48VLanding() {
                             <p className="text-amber-400 font-mono font-semibold text-sm sm:text-base">
                               {getDisplayTime(session.time, block)}
                             </p>
-                            <span className={`md:hidden px-2 py-0.5 ${badge.bg} ${badge.text} text-xs font-semibold rounded-full`}>
+                            <span className={`md:hidden px-2 py-0.5 ${badge.bg} ${badge.text} text-xs font-semibold rounded-full`} style={badge.style || {}}>
                               {badge.label}
                             </span>
                             {session.additionalType && (() => {
                               const addBadge = getTypeBadge(session.additionalType);
                               return (
-                                <span className={`md:hidden px-2 py-0.5 ${addBadge.bg} ${addBadge.text} text-xs font-semibold rounded-full`}>
+                                <span className={`md:hidden px-2 py-0.5 ${addBadge.bg} ${addBadge.text} text-xs font-semibold rounded-full`} style={addBadge.style || {}}>
                                   {addBadge.label}
                                 </span>
                               );
@@ -702,13 +702,13 @@ export default function GamiCon48VLanding() {
                           </div>
                           <div className="flex-grow">
                             <div className="hidden md:flex flex-wrap items-center gap-2 mb-2">
-                              <span className={`px-3 py-1 ${badge.bg} ${badge.text} text-xs font-semibold rounded-full`}>
+                              <span className={`px-3 py-1 ${badge.bg} ${badge.text} text-xs font-semibold rounded-full`} style={badge.style || {}}>
                                 {badge.label}
                               </span>
                               {session.additionalType && (() => {
                                 const addBadge = getTypeBadge(session.additionalType);
                                 return (
-                                  <span className={`px-3 py-1 ${addBadge.bg} ${addBadge.text} text-xs font-semibold rounded-full`}>
+                                  <span className={`px-3 py-1 ${addBadge.bg} ${addBadge.text} text-xs font-semibold rounded-full`} style={addBadge.style || {}}>
                                     {addBadge.label}
                                   </span>
                                 );
@@ -804,9 +804,9 @@ export default function GamiCon48VLanding() {
 
                     {/* In the Arcade */}
                     {block.arcade && block.arcade.length > 0 && (
-                      <div className="border-t-2 border-emerald-700" style={{ backgroundColor: 'rgba(4,120,87,0.08)' }}>
+                      <div style={{ borderTop: '2px solid #047857', backgroundColor: 'rgba(4,120,87,0.08)' }}>
                         <div className="px-4 sm:px-6 pt-4 pb-2">
-                          <h5 className="text-emerald-400 font-semibold text-base sm:text-lg" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
+                          <h5 className="font-semibold" style={{ fontFamily: 'Josefin Sans, sans-serif', fontSize: '1.125rem', color: '#34d399' }}>
                             In the Arcade
                           </h5>
                         </div>
@@ -816,20 +816,21 @@ export default function GamiCon48VLanding() {
                           return (
                             <div 
                               key={idx} 
-                              className={`px-4 sm:px-6 py-4 sm:py-5 ${idx !== block.arcade.length - 1 ? 'border-b border-emerald-900/30' : ''}`}
+                              className={`px-4 sm:px-6 py-4 sm:py-5`}
+                              style={idx !== block.arcade.length - 1 ? { borderBottom: '1px solid rgba(4,120,87,0.3)' } : {}}
                             >
                               <div className="flex flex-col md:flex-row md:items-start gap-2 sm:gap-4">
                                 <div className="flex items-center gap-3 md:block md:flex-shrink-0 md:w-24">
                                   <p className="text-amber-400 font-mono font-semibold text-sm sm:text-base">
                                     {getDisplayTime(session.time, block)}
                                   </p>
-                                  <span className={`md:hidden px-2 py-0.5 ${badge.bg} ${badge.text} text-xs font-semibold rounded-full`}>
+                                  <span className={`md:hidden px-2 py-0.5 ${badge.bg} ${badge.text} text-xs font-semibold rounded-full`} style={badge.style || {}}>
                                     {badge.label}
                                   </span>
                                 </div>
                                 <div className="flex-grow">
                                   <div className="hidden md:flex flex-wrap items-center gap-2 mb-2">
-                                    <span className={`px-3 py-1 ${badge.bg} ${badge.text} text-xs font-semibold rounded-full`}>
+                                    <span className={`px-3 py-1 ${badge.bg} ${badge.text} text-xs font-semibold rounded-full`} style={badge.style || {}}>
                                       {badge.label}
                                     </span>
                                   </div>
@@ -919,9 +920,9 @@ export default function GamiCon48VLanding() {
 
                     {/* In the Talent Exchange */}
                     {block.talentExchange && block.talentExchange.length > 0 && (
-                      <div className="border-t-2 border-indigo-700" style={{ backgroundColor: 'rgba(67,56,202,0.08)' }}>
+                      <div style={{ borderTop: '2px solid #4338ca', backgroundColor: 'rgba(67,56,202,0.08)' }}>
                         <div className="px-4 sm:px-6 pt-4 pb-2">
-                          <h5 className="text-indigo-400 font-semibold text-base sm:text-lg" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
+                          <h5 className="font-semibold" style={{ fontFamily: 'Josefin Sans, sans-serif', fontSize: '1.125rem', color: '#818cf8' }}>
                             In the Talent Exchange
                           </h5>
                         </div>
@@ -930,7 +931,8 @@ export default function GamiCon48VLanding() {
                           return (
                             <div 
                               key={idx} 
-                              className={`px-4 sm:px-6 py-4 sm:py-5 ${idx !== block.talentExchange.length - 1 ? 'border-b border-indigo-900/30' : ''}`}
+                              className={`px-4 sm:px-6 py-4 sm:py-5`}
+                              style={idx !== block.talentExchange.length - 1 ? { borderBottom: '1px solid rgba(67,56,202,0.3)' } : {}}
                             >
                               <div className="flex flex-col md:flex-row md:items-start gap-2 sm:gap-4">
                                 <div className="flex items-center gap-3 md:block md:flex-shrink-0 md:w-24">
