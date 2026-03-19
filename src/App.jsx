@@ -318,6 +318,15 @@ function getTypeBadge(type) {
   return styles[type] || styles.talk;
 }
 
+// Calculate session duration in minutes from time and endTime strings
+function getSessionDuration(startStr, endStr) {
+  const [sh, sm] = startStr.split(':').map(Number);
+  const [eh, em] = endStr.split(':').map(Number);
+  let diff = (eh * 60 + em) - (sh * 60 + sm);
+  if (diff <= 0) diff += 24 * 60;
+  return diff;
+}
+
 // Get session start time as Date object
 function getSessionStartTime(session, block) {
   const [hours, minutes] = session.time.split(':').map(Number);
@@ -836,6 +845,11 @@ export default function GamiCon48VLanding() {
                                   </div>
                                   <h5 className="text-base sm:text-lg font-semibold text-white mb-1" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
                                     {session.title}
+                                    {session.endTime && (
+                                      <span className="text-slate-400 font-normal text-sm ml-2">
+                                        {getSessionDuration(session.time, session.endTime)} minutes
+                                      </span>
+                                    )}
                                   </h5>
                                   <p className="text-sky-300 text-sm mb-2">
                                     {session.speaker}
@@ -943,6 +957,11 @@ export default function GamiCon48VLanding() {
                                 <div className="flex-grow">
                                   <h5 className="text-base sm:text-lg font-semibold text-white mb-1" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
                                     {session.title}
+                                    {session.endTime && (
+                                      <span className="text-slate-400 font-normal text-sm ml-2">
+                                        {getSessionDuration(session.time, session.endTime)} minutes
+                                      </span>
+                                    )}
                                   </h5>
                                   {session.speaker && (
                                     <p className="text-sky-300 text-sm mb-2">
