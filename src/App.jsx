@@ -310,7 +310,7 @@ function getTypeBadge(type) {
     keynote: { bg: 'bg-red-700', text: 'text-white', label: 'Keynote' },
     panel: { bg: 'bg-purple-700', text: 'text-white', label: 'Panel' },
     talk: { bg: 'bg-sky-700', text: 'text-white', label: 'Talk' },
-    game: { bg: 'bg-rose-700', text: 'text-white', label: 'Game' },
+    game: { bg: 'bg-emerald-700', text: 'text-white', label: 'Game' },
     sponsor: { bg: 'bg-orange-700', text: 'text-white', label: 'Sponsor' },
     intro: { bg: 'bg-slate-600', text: 'text-white', label: 'Welcome' },
     experience: { bg: 'bg-teal-700', text: 'text-white', label: 'Experience' }
@@ -804,9 +804,9 @@ export default function GamiCon48VLanding() {
 
                     {/* In the Arcade */}
                     {block.arcade && block.arcade.length > 0 && (
-                      <div className="border-t-2 border-rose-800" style={{ backgroundColor: 'rgba(159,18,57,0.08)' }}>
+                      <div className="border-t-2 border-emerald-700" style={{ backgroundColor: 'rgba(4,120,87,0.08)' }}>
                         <div className="px-4 sm:px-6 pt-4 pb-2">
-                          <h5 className="text-rose-400 font-semibold text-sm" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
+                          <h5 className="text-emerald-400 font-semibold text-base sm:text-lg" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
                             In the Arcade
                           </h5>
                         </div>
@@ -816,7 +816,7 @@ export default function GamiCon48VLanding() {
                           return (
                             <div 
                               key={idx} 
-                              className={`px-4 sm:px-6 py-4 sm:py-5 ${idx !== block.arcade.length - 1 ? 'border-b border-rose-900/30' : ''}`}
+                              className={`px-4 sm:px-6 py-4 sm:py-5 ${idx !== block.arcade.length - 1 ? 'border-b border-emerald-900/30' : ''}`}
                             >
                               <div className="flex flex-col md:flex-row md:items-start gap-2 sm:gap-4">
                                 <div className="flex items-center gap-3 md:block md:flex-shrink-0 md:w-24">
@@ -921,7 +921,7 @@ export default function GamiCon48VLanding() {
                     {block.talentExchange && block.talentExchange.length > 0 && (
                       <div className="border-t-2 border-indigo-700" style={{ backgroundColor: 'rgba(67,56,202,0.08)' }}>
                         <div className="px-4 sm:px-6 pt-4 pb-2">
-                          <h5 className="text-indigo-400 font-semibold text-sm" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
+                          <h5 className="text-indigo-400 font-semibold text-base sm:text-lg" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
                             In the Talent Exchange
                           </h5>
                         </div>
