@@ -39,11 +39,11 @@ const scheduleData = [
       { time: "00:00", speaker: "James Bishop and Jimbo Clark", title: "Welcome to GamiCon48V 2026!", type: "intro", country: "Hong Kong" },
       { time: "00:30", speaker: "Monica Cornetti", title: "F*ck Average", type: "keynote", additionalType: "talk", country: "USA",
         description: "This keynote is for the people who have felt the friction—the ones who tried to raise the bar in corporate training and were met with blank stares, outdated systems, or quiet resistance. It's a clear-eyed call to reject mediocrity in how we design, deliver, and defend meaningful learning. Takeaway: Average is a choice. So is doing something better." },
-      { time: "01:00", speaker: "Bernardo Letayf", title: "BlueRabbit", type: "sponsor", country: "Mexico", description: "Instructions for Using the Gamified Conference App BlueRabbit" },
+      { time: "01:00", speaker: "Bernardo Letayf", title: "BlueRabbit", type: "experience", country: "Mexico", description: "Instructions for Using the Gamified Conference App BlueRabbit" },
       { time: "01:15", speaker: "James Bishop", title: "Crossroads: Introduction to the Conference Charity", type: "experience", country: "Hong Kong" },
       { time: "01:30", speaker: "James Bishop", title: "How to Get Away with Murder at a Conference!", type: "talk", country: "Hong Kong", 
         description: "AI-powered design in action: Learn how a resilience conference was transformed into an 80-person murder mystery—designed 80% with AI in under 3 hours." },
-      { time: "02:00", speaker: "Amanda Friday", title: "The Mythic Method: A Magical Approach to Learning Design", type: "talk", country: "USA",
+      { time: "02:00", speaker: "Amanda Friday, PhD", title: "The Mythic Method: A Magical Approach to Learning Design", type: "talk", country: "USA",
         description: "Drawing from narrative psychology, the monomyth, and Sinospheric myths, Dr. Friday shows how story structures can be translated into practical learning design that drives real behavior change." },
       { time: "02:30", speaker: "James Bishop and Jimbo Clark", title: "Exploration Experience", type: "experience", country: "Hong Kong" },
       { time: "03:00", speaker: "Tim Hamons", title: "Sketch Your Game: Visual Tools to Design Engagement, Flow, and Player Motivation", type: "playshop", country: "Singapore",
@@ -53,7 +53,12 @@ const scheduleData = [
       { time: "05:00", speaker: "Beatrice Chu", title: "Bringing University Programs to Life Through Gamification", type: "talk", country: "Hong Kong",
         description: "See how HKUST uses gamification to drive faculty development, learner engagement, and institutional change at scale—with concrete design decisions and lessons learned, not surface-level gimmicks." },
       { time: "05:30", speaker: "James Bishop and Jimbo Clark", title: "Block 1 Wrap-up", type: "experience", country: "Hong Kong" }
-    ]
+    ],
+    arcade: [
+      { time: "03:30", endTime: "04:30", speaker: "Natalie Gillard", title: "Factuality", type: "game", country: "",
+        description: "Step out of your opinion and into the facts during this powerful experience. This guided, data-driven simulation lets you feel the impact of global realities." }
+    ],
+    talentExchange: []
   },
   {
     block: 2,
@@ -78,7 +83,12 @@ const scheduleData = [
       { time: "10:00", speaker: "Rihan Mustapha", title: "GameFrame in Action: Bringing Purpose, Play, and Progress to Adult Learning", type: "playshop", country: "Saudi Arabia",
         description: "Experience the GameFrame model firsthand. Blend coaching, gamification, and emotional intelligence to create meaningful adult learning." },
       { time: "11:30", speaker: "Moe Ash and Zunara Nauman", title: "Block 2 Wrap-up", type: "experience", country: "UAE" }
-    ]
+    ],
+    arcade: [
+      { time: "10:30", endTime: "11:30", speaker: "Rebecca Arnett", title: "Control-Alt-Deceive", type: "game", country: "",
+        description: "Identify and thwart cyber criminals during this social deduction game." }
+    ],
+    talentExchange: []
   },
   {
     block: 3,
@@ -95,8 +105,8 @@ const scheduleData = [
         description: "Transform learning through game-based dynamics. Experience the Octalysis Framework in action and apply gamification to your own professional challenges." },
       { time: "14:00", speaker: "Alina Tudorache", title: "The Gamification Layer Every Profitable DAO Needs in 2026", type: "talk", country: "Romania",
         description: "Most DAOs die of apathy, not tech failure. Discover the missing behavior layer that turns ghost-town communities into thriving ecosystems." },
-      { time: "14:30", speaker: "Michala Liavaag & Dr Ana Garner", title: "Throwdown: Cyber Security Incident Response Team Experience (CSIRTxp)", type: "experience", country: "" },
-      { time: "14:45", speaker: "Bernardo Letayf & Roman Rackwitz", title: "Exploration Experience", type: "experience", country: "Mexico/Germany" },
+      { time: "14:30", speaker: "Michala Liavaag & Dr Ana Garner", title: "Throwdown Presentation: Cyber Security Incident Response Team Experience (CSIRTxp)", type: "experience", country: "" },
+      { time: "14:45", speaker: "Moe Ash", title: "Throwdown Presentation: PENTA: It Takes 5 to Ideate a Learning Game", type: "experience", country: "" },
       { time: "15:00", speaker: "Claudio Guz", title: "Vibe Game Coding: Creating Games at the Speed of Imagination", type: "talk", country: "Argentina",
         description: "Create games through conversation, not code. Watch ideas become mechanics instantly through real-time AI collaboration." },
       { time: "15:30", speaker: "Bernardo Letayf & Roman Rackwitz", title: "Exploration Experience", type: "experience", country: "Mexico/Germany" },
@@ -105,6 +115,13 @@ const scheduleData = [
       { time: "17:00", speaker: "Cedric Pontet", title: "Growing a Global Playful Community: The Story of #play14 and Lessons for Sustainable, Organic Growth", type: "talk", country: "Luxembourg",
         description: "From a small idea in Luxembourg to a thriving international community, #play14 grew because people chose to participate. Explore design principles for sustainable community growth." },
       { time: "17:30", speaker: "Bernardo Letayf and Roman Rackwitz", title: "Block 3 Wrap-up", type: "experience", country: "Mexico/Germany" }
+    ],
+    arcade: [
+      { time: "13:00", endTime: "14:00", speaker: "Clark Aldrich", title: "Socratic Cards", type: "game", country: "",
+        description: "Surprise even yourself as simple A/B questions lead to deep exploration. \"Starts as a game, ends up as a guide.\"" }
+    ],
+    talentExchange: [
+      { time: "13:30", endTime: "14:00", speaker: "Shawna Stushnoff", title: "The Game Your Brain Is Already Playing", country: "" }
     ]
   },
   {
@@ -120,7 +137,7 @@ const scheduleData = [
       { time: "18:00", speaker: "Robert Feeney", title: "Intro Block", type: "intro", country: "USA" },
       { time: "18:30", speaker: "Rebecca Arnett", title: "Hidden Gems: Free & Cheap Tools to Level Up Your Training", type: "playshop", country: "USA",
         description: "Stop paying for expensive platforms. Discover free game engines, design tools, and collaborative platforms that make gamification accessible to everyone." },
-      { time: "20:00", speaker: "Fiona Gironella", title: "Throwdown: Border Security Challenge!", type: "experience", country: "" },
+      { time: "20:00", speaker: "Fiona Gironella", title: "Throwdown Presentation: Border Security Challenge!", type: "experience", country: "" },
       { time: "20:15", speaker: "Robert Feeney", title: "Exploration Experience", type: "experience", country: "USA" },
       { time: "20:30", speaker: "Steve Abrams", title: "Making the Story Move Us: Connecting Story Archetypes to the Most Effective Game Mechanics", type: "talk", country: "USA",
         description: "Discover how classic narrative archetypes can be intentionally integrated into gamified learning. Learn a practical framework for matching story structures with game mechanics to create more engaging experiences." },
@@ -129,6 +146,17 @@ const scheduleData = [
       { time: "22:00", speaker: "Bret Wardle", title: "Play with Purpose: Remembering Games Through Empathetic Notes", type: "playshop", country: "USA",
         description: "Bridge experience and insight. Learn a structured note-taking approach to capture emotional responses and synthesize them into better designs." },
       { time: "23:30", speaker: "Robert Feeney", title: "Block 4 Wrap-up", type: "experience", country: "USA" }
+    ],
+    arcade: [
+      { time: "19:00", endTime: "20:00", speaker: "Sharon Goza", title: "4 Years to Mars", type: "game", country: "",
+        description: "Join this scenario preview. Fund research, launch projects, and complete mission objectives based on real NASA projects." },
+      { time: "22:30", endTime: "23:30", speaker: "John Chen", title: "Game on!", type: "game", country: "",
+        description: "Play, debrief, and explore how games lead to powerful learning during this high-energy Engaging Virtual experience." }
+    ],
+    talentExchange: [
+      { time: "19:00", endTime: "19:30", speaker: "Jeffery Riley", title: "Accessibility and Games in Storyline", country: "" },
+      { time: "19:30", endTime: "20:00", speaker: "Gwen Fitzpatrick", title: "Gameful Learning Through the Lens of Adult Learning", country: "" },
+      { time: "22:30", endTime: "23:30", speaker: "Mary Nunaley, Kristi Conlon, Kevin D. Turner, Dr. Karen Fiorillo, Charlee Riggio", title: "Career Panel", country: "" }
     ]
   },
   {
@@ -152,6 +180,14 @@ const scheduleData = [
       { time: "04:30", speaker: "Maytwin Pitipornvivat", title: "The Premium Human Play: Gamification Design for 'Premium Human' Skill", type: "talk", country: "Thailand",
         description: "In the age of AI, being human has become premium. Explore design techniques for developing the 7 core human skills through gamification." },
       { time: "05:30", speaker: "Elmer Lau", title: "Block 5 Wrap-up", type: "experience", country: "Hong Kong" }
+    ],
+    arcade: [
+      { time: "01:00", endTime: "02:00", speaker: "Meike Sauerwein", title: "From Farm to Fridge", type: "game", country: "",
+        description: "\"Got milk?\" Navigate the journey from cow to carton to cup, making choices that impact milk\'s environmental footprint." }
+    ],
+    talentExchange: [
+      { time: "01:00", endTime: "01:30", speaker: "Jazmin Webster", title: "Bored or Onboard: Rethinking Your Employee\'s Day 1 Experience", country: "" },
+      { time: "01:30", endTime: "02:00", speaker: "Joshua Yavelberg", title: "Whatcha Wanna Know About Being Agile", country: "" }
     ]
   },
   {
@@ -169,15 +205,20 @@ const scheduleData = [
         description: "What if gamified learning isn't about adding mechanics, but reimagining spaces where learning happens? A foresight practitioner's perspective." },
       { time: "07:00", speaker: "Sufiz Suffian", title: "The Hidden System in Play", type: "talk", country: "Malaysia",
         description: "Every game contains an underlying system that shapes what players learn, feel, and do. Discover the invisible architecture of gamified experiences." },
-      { time: "08:00", speaker: "Snjezana Slabek", title: "Throwdown: CogFactory: From Chaos to Clarity with Industrial AI", type: "experience", country: "" },
-      { time: "08:15", speaker: "Jolina Kahn", title: "Throwdown: Monsters and Heroes", type: "experience", country: "" },
+      { time: "08:00", speaker: "Snjezana Slabek", title: "Throwdown Presentation: CogFactory: From Chaos to Clarity with Industrial AI", type: "experience", country: "" },
+      { time: "08:15", speaker: "Jolina Kahn", title: "Throwdown Presentation: Monsters and Heroes", type: "experience", country: "" },
       { time: "08:30", speaker: "Namitha Vijayakumar", title: "From Questionnaires to Quests: Rethinking Personality Assessments", type: "talk", country: "India",
         description: "Step into a gamified Everest expedition where every decision reveals personality insights—not through questionnaires, but through lived moments of pressure and uncertainty." },
       { time: "09:30", speaker: "Moe Ash, Kerem Yazici, and Ercan Altuğ Yılmaz", title: "Panel: What's New and in the Future for Gamification", type: "panel", country: "UAE/Türkiye" },
       { time: "10:15", speaker: "Bhaskar Thyagarajan", title: "Don't Wing It! When Games Tell the Truth: Data-based Debriefing for High-Impact Behavioral Learning", type: "playshop", country: "India",
         description: "Move beyond subjective facilitation. Learn breakthrough techniques for data-driven debriefing that proves learning impact." },
       { time: "11:45", speaker: "Moe Ash and Kerem Yazici", title: "Block 6 Wrap-up", type: "experience", country: "UAE" }
-    ]
+    ],
+    arcade: [
+      { time: "10:15", endTime: "10:45", speaker: "John Robin", title: "Kairos Games", type: "game", country: "",
+        description: "First explore values, then work with a team to complete the Ricochet challenge with two fun games optimized for mobile play." }
+    ],
+    talentExchange: []
   },
   {
     block: 7,
@@ -192,7 +233,7 @@ const scheduleData = [
       { time: "12:00", speaker: "Isobel Wallace", title: "Intro Block", type: "intro", country: "UK" },
       { time: "12:30", speaker: "Monica Cornetti, Marigo Raftopoulos, David Metcalf, Rasha Morsi", title: "AI Hardcoded Bias: UX, AI, and the Human Cost of Design", type: "panel", country: "Global",
         description: "This panel examines how algorithmic systems in healthcare, education, and the workplace often reinforce gendered assumptions, shaping who benefits, who is seen, and who is left out." },
-      { time: "13:30", speaker: "Bálint Koller", title: "Throwdown: Stakeholder Quest: Leveling Up Digital Learning at Grundfos", type: "experience", country: "" },
+      { time: "13:30", speaker: "Bálint Koller", title: "Throwdown Presentation: Stakeholder Quest: Leveling Up Digital Learning at Grundfos", type: "experience", country: "" },
       { time: "13:45", speaker: "Isobel Wallace", title: "Exploration Experience", type: "experience", country: "UK" },
       { time: "14:00", speaker: "Ayman Elarby", title: "Feedback Marvels", type: "talk", country: "Egypt",
         description: "Give and receive professional feedback through a board game designed with game-based learning principles." },
@@ -202,6 +243,13 @@ const scheduleData = [
       { time: "16:00", speaker: "Joshua Yavelberg", title: "The Clockwork Prototype Lab: Gamifying Be AI-gile", type: "playshop", country: "USA",
         description: "Enter a steampunk-inspired design bay. Build a playable prototype in 90 minutes while learning the Be AI-gile framework through play." },
       { time: "17:30", speaker: "Isobel Wallace", title: "Block 7 Wrap-up", type: "experience", country: "UK" }
+    ],
+    arcade: [
+      { time: "16:15", endTime: "17:15", speaker: "Thiago Barrionuevo", title: "Survivors", type: "game", country: "",
+        description: "An online cooperative game where each player has unique, partial information and must collaborate, share clues, and make fast decisions to succeed." }
+    ],
+    talentExchange: [
+      { time: "16:30", endTime: "17:30", speaker: "Danielle Watkins and Christy Tucker", title: "5 Portfolio Mistakes Instructional Designers Keep Making (and How to Fix Them)", country: "" }
     ]
   },
   {
@@ -225,6 +273,16 @@ const scheduleData = [
       { time: "22:30", speaker: "Keith Lillico", title: "\"Tell Me Why\": What Toddlers, Boy Bands, and Learners Teach Us About Motivation", type: "talk", country: "Canada",
         description: "Examine the underlying ecosystem of human motivation that shapes engagement across very different contexts, from early learning to enterprise compliance. Learn a practical framework for identifying the often-hidden motivations of an audience." },
       { time: "23:00", speaker: "Sententia Team", title: "Closing Celebration", type: "experience", country: "" }
+    ],
+    arcade: [
+      { time: "19:30", endTime: "20:30", speaker: "Peter Williamson", title: "BarometerXP: Hot Air, Cool Games", type: "game", country: "",
+        description: "Play a vibe-coded game, then a design thinking activity to explore your own ideas for vibe-coding games." },
+      { time: "21:30", endTime: "23:00", speaker: "Lee Chazen", title: "Global Challenge", type: "game", country: "",
+        description: "Explore the world in this team-based strategy game. Then land back in your own community to consider how you can vibe-code a game as far-reaching!" }
+    ],
+    talentExchange: [
+      { time: "19:30", endTime: "20:30", speaker: "Keith Lillico", title: "Supercharge Your Network, Supercharge Your Career", country: "" },
+      { time: "21:30", endTime: "23:00", speaker: "", title: "Talent Exchange Speed Networking Event", country: "" }
     ]
   }
 ];
@@ -252,7 +310,7 @@ function getTypeBadge(type) {
     keynote: { bg: 'bg-red-700', text: 'text-white', label: 'Keynote' },
     panel: { bg: 'bg-purple-700', text: 'text-white', label: 'Panel' },
     talk: { bg: 'bg-sky-700', text: 'text-white', label: 'Talk' },
-    game: { bg: 'bg-emerald-700', text: 'text-white', label: 'Game' },
+    game: { bg: 'bg-rose-700', text: 'text-white', label: 'Game' },
     sponsor: { bg: 'bg-orange-700', text: 'text-white', label: 'Sponsor' },
     intro: { bg: 'bg-slate-600', text: 'text-white', label: 'Welcome' },
     experience: { bg: 'bg-teal-700', text: 'text-white', label: 'Experience' }
@@ -269,8 +327,16 @@ function getSessionStartTime(session, block) {
 }
 
 // Get session end time based on next session or block end
-function getSessionEndTime(session, sessionIndex, block) {
-  const sessions = block.sessions;
+function getSessionEndTime(session, sessionIndex, block, sessionsArray) {
+  // If session has explicit end time, use it (concurrent sessions)
+  if (session.endTime) {
+    const [hours, minutes] = session.endTime.split(':').map(Number);
+    const date = new Date(block.gmtStart);
+    date.setUTCHours(hours, minutes, 0, 0);
+    return date;
+  }
+  
+  const sessions = sessionsArray || block.sessions;
   
   // If there's a next session, use its start time
   if (sessionIndex < sessions.length - 1) {
@@ -735,6 +801,224 @@ export default function GamiCon48VLanding() {
                       </div>
                     );
                   })}
+
+                    {/* In the Arcade */}
+                    {block.arcade && block.arcade.length > 0 && (
+                      <div className="border-t-2 border-rose-800" style={{ backgroundColor: 'rgba(159,18,57,0.08)' }}>
+                        <div className="px-4 sm:px-6 pt-4 pb-2">
+                          <h5 className="text-rose-400 font-semibold text-sm" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
+                            In the Arcade
+                          </h5>
+                        </div>
+                        {block.arcade.map((session, idx) => {
+                          const badge = getTypeBadge(session.type);
+                          const menuId = `arcade-${block.block}-${idx}`;
+                          return (
+                            <div 
+                              key={idx} 
+                              className={`px-4 sm:px-6 py-4 sm:py-5 ${idx !== block.arcade.length - 1 ? 'border-b border-rose-900/30' : ''}`}
+                            >
+                              <div className="flex flex-col md:flex-row md:items-start gap-2 sm:gap-4">
+                                <div className="flex items-center gap-3 md:block md:flex-shrink-0 md:w-24">
+                                  <p className="text-amber-400 font-mono font-semibold text-sm sm:text-base">
+                                    {getDisplayTime(session.time, block)}
+                                  </p>
+                                  <span className={`md:hidden px-2 py-0.5 ${badge.bg} ${badge.text} text-xs font-semibold rounded-full`}>
+                                    {badge.label}
+                                  </span>
+                                </div>
+                                <div className="flex-grow">
+                                  <div className="hidden md:flex flex-wrap items-center gap-2 mb-2">
+                                    <span className={`px-3 py-1 ${badge.bg} ${badge.text} text-xs font-semibold rounded-full`}>
+                                      {badge.label}
+                                    </span>
+                                  </div>
+                                  <h5 className="text-base sm:text-lg font-semibold text-white mb-1" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
+                                    {session.title}
+                                  </h5>
+                                  <p className="text-sky-300 text-sm mb-2">
+                                    {session.speaker}
+                                  </p>
+                                  {session.description && (
+                                    <p className="text-slate-300 text-base leading-relaxed">
+                                      {session.description}
+                                    </p>
+                                  )}
+                                  {/* Calendar Dropdown */}
+                                  <div className="mt-3 relative calendar-dropdown">
+                                    <button
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        setCalendarMenuOpen(calendarMenuOpen === menuId ? null : menuId);
+                                      }}
+                                      className="w-full sm:w-auto inline-flex items-center justify-center sm:justify-start gap-2 px-4 py-3 sm:py-2.5 text-sm text-slate-300 bg-slate-700/50 hover:bg-slate-600 active:bg-slate-500 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-800 min-h-[44px]"
+                                      aria-expanded={calendarMenuOpen === menuId}
+                                      aria-haspopup="true"
+                                      aria-label={`Add ${session.title} to calendar`}
+                                    >
+                                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                      </svg>
+                                      Add to Calendar
+                                      <svg className={`w-4 h-4 transition-transform ${calendarMenuOpen === menuId ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                      </svg>
+                                    </button>
+                                    {calendarMenuOpen === menuId && (
+                                      <div className="absolute left-0 mt-2 w-56 bg-slate-800 border border-slate-600 rounded-lg shadow-xl z-50" role="menu">
+                                        <a
+                                          href={getGoogleCalendarUrl(session, idx, block)}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className="flex items-center gap-3 px-4 py-3 text-sm text-slate-300 hover:bg-slate-700 active:bg-slate-600 rounded-t-lg transition-colors min-h-[44px]"
+                                          role="menuitem"
+                                          onClick={() => setCalendarMenuOpen(null)}
+                                        >
+                                          <svg className="w-5 h-5 text-red-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                                          </svg>
+                                          Google Calendar
+                                          <span className="sr-only">(opens in new tab)</span>
+                                        </a>
+                                        <button
+                                          onClick={() => {
+                                            generateICS(session, idx, block);
+                                            setCalendarMenuOpen(null);
+                                          }}
+                                          className="flex items-center gap-3 w-full px-4 py-3 text-sm text-slate-300 hover:bg-slate-700 active:bg-slate-600 transition-colors min-h-[44px] text-left"
+                                          role="menuitem"
+                                        >
+                                          <svg className="w-5 h-5 text-blue-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                            <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/>
+                                          </svg>
+                                          Apple Calendar (.ics)
+                                        </button>
+                                        <button
+                                          onClick={() => {
+                                            generateICS(session, idx, block);
+                                            setCalendarMenuOpen(null);
+                                          }}
+                                          className="flex items-center gap-3 w-full px-4 py-3 text-sm text-slate-300 hover:bg-slate-700 active:bg-slate-600 rounded-b-lg transition-colors min-h-[44px] text-left"
+                                          role="menuitem"
+                                        >
+                                          <svg className="w-5 h-5 text-sky-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                            <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/>
+                                          </svg>
+                                          Outlook (.ics)
+                                        </button>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+
+                    {/* In the Talent Exchange */}
+                    {block.talentExchange && block.talentExchange.length > 0 && (
+                      <div className="border-t-2 border-indigo-700" style={{ backgroundColor: 'rgba(67,56,202,0.08)' }}>
+                        <div className="px-4 sm:px-6 pt-4 pb-2">
+                          <h5 className="text-indigo-400 font-semibold text-sm" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
+                            In the Talent Exchange
+                          </h5>
+                        </div>
+                        {block.talentExchange.map((session, idx) => {
+                          const menuId = `te-${block.block}-${idx}`;
+                          return (
+                            <div 
+                              key={idx} 
+                              className={`px-4 sm:px-6 py-4 sm:py-5 ${idx !== block.talentExchange.length - 1 ? 'border-b border-indigo-900/30' : ''}`}
+                            >
+                              <div className="flex flex-col md:flex-row md:items-start gap-2 sm:gap-4">
+                                <div className="flex items-center gap-3 md:block md:flex-shrink-0 md:w-24">
+                                  <p className="text-amber-400 font-mono font-semibold text-sm sm:text-base">
+                                    {getDisplayTime(session.time, block)}
+                                  </p>
+                                </div>
+                                <div className="flex-grow">
+                                  <h5 className="text-base sm:text-lg font-semibold text-white mb-1" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
+                                    {session.title}
+                                  </h5>
+                                  {session.speaker && (
+                                    <p className="text-sky-300 text-sm mb-2">
+                                      {session.speaker}
+                                    </p>
+                                  )}
+                                  {/* Calendar Dropdown */}
+                                  <div className="mt-3 relative calendar-dropdown">
+                                    <button
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        setCalendarMenuOpen(calendarMenuOpen === menuId ? null : menuId);
+                                      }}
+                                      className="w-full sm:w-auto inline-flex items-center justify-center sm:justify-start gap-2 px-4 py-3 sm:py-2.5 text-sm text-slate-300 bg-slate-700/50 hover:bg-slate-600 active:bg-slate-500 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-800 min-h-[44px]"
+                                      aria-expanded={calendarMenuOpen === menuId}
+                                      aria-haspopup="true"
+                                      aria-label={`Add ${session.title} to calendar`}
+                                    >
+                                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                      </svg>
+                                      Add to Calendar
+                                      <svg className={`w-4 h-4 transition-transform ${calendarMenuOpen === menuId ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                      </svg>
+                                    </button>
+                                    {calendarMenuOpen === menuId && (
+                                      <div className="absolute left-0 mt-2 w-56 bg-slate-800 border border-slate-600 rounded-lg shadow-xl z-50" role="menu">
+                                        <a
+                                          href={getGoogleCalendarUrl(session, idx, block)}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className="flex items-center gap-3 px-4 py-3 text-sm text-slate-300 hover:bg-slate-700 active:bg-slate-600 rounded-t-lg transition-colors min-h-[44px]"
+                                          role="menuitem"
+                                          onClick={() => setCalendarMenuOpen(null)}
+                                        >
+                                          <svg className="w-5 h-5 text-red-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                                          </svg>
+                                          Google Calendar
+                                          <span className="sr-only">(opens in new tab)</span>
+                                        </a>
+                                        <button
+                                          onClick={() => {
+                                            generateICS(session, idx, block);
+                                            setCalendarMenuOpen(null);
+                                          }}
+                                          className="flex items-center gap-3 w-full px-4 py-3 text-sm text-slate-300 hover:bg-slate-700 active:bg-slate-600 transition-colors min-h-[44px] text-left"
+                                          role="menuitem"
+                                        >
+                                          <svg className="w-5 h-5 text-blue-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                            <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/>
+                                          </svg>
+                                          Apple Calendar (.ics)
+                                        </button>
+                                        <button
+                                          onClick={() => {
+                                            generateICS(session, idx, block);
+                                            setCalendarMenuOpen(null);
+                                          }}
+                                          className="flex items-center gap-3 w-full px-4 py-3 text-sm text-slate-300 hover:bg-slate-700 active:bg-slate-600 rounded-b-lg transition-colors min-h-[44px] text-left"
+                                          role="menuitem"
+                                        >
+                                          <svg className="w-5 h-5 text-sky-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                            <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/>
+                                          </svg>
+                                          Outlook (.ics)
+                                        </button>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
                 </div>
               )}
             </div>
