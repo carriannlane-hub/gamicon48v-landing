@@ -148,7 +148,7 @@ const scheduleData = [
       { time: "23:30", speaker: "Robert Feeney", title: "Block 4 Wrap-up", type: "experience", country: "USA" }
     ],
     arcade: [
-      { time: "19:00", endTime: "20:00", speaker: "Sharon Goza", title: "4 Years to Mars", type: "game", country: "",
+      { time: "19:00", endTime: "20:30", speaker: "Sharon Goza", title: "4 Years to Mars", type: "game", country: "",
         description: "Join this scenario preview. Fund research, launch projects, and complete mission objectives based on real NASA projects." },
       { time: "22:30", endTime: "23:30", speaker: "John Chen", title: "Game on!", type: "game", country: "",
         description: "Play, debrief, and explore how games lead to powerful learning during this high-energy Engaging Virtual experience." }
@@ -156,7 +156,7 @@ const scheduleData = [
     talentExchange: [
       { time: "19:00", endTime: "19:30", speaker: "Jeffery Riley", title: "Accessibility and Games in Storyline", country: "" },
       { time: "19:30", endTime: "20:00", speaker: "Gwen Fitzpatrick", title: "Gameful Learning Through the Lens of Adult Learning", country: "" },
-      { time: "22:30", endTime: "23:30", speaker: "Mary Nunaley, Kristi Conlon, Kevin D. Turner, Dr. Karen Fiorillo, Charlee Riggio", title: "Career Panel", country: "" }
+      { time: "22:30", endTime: "00:00", speaker: "Mary Nunaley, Kristi Conlon, Kevin D. Turner, Dr. Karen Fiorillo, Charlee Riggio", title: "Career Panel", country: "" }
     ]
   },
   {
@@ -215,7 +215,7 @@ const scheduleData = [
       { time: "11:45", speaker: "Moe Ash and Kerem Yazici", title: "Block 6 Wrap-up", type: "experience", country: "UAE" }
     ],
     arcade: [
-      { time: "10:15", endTime: "10:45", speaker: "John Robin", title: "Kairos Games", type: "game", country: "",
+      { time: "10:15", endTime: "11:45", speaker: "John Robin", title: "Kairos Games", type: "game", country: "",
         description: "First explore values, then work with a team to complete the Ricochet challenge with two fun games optimized for mobile play." }
     ],
     talentExchange: []
@@ -245,7 +245,7 @@ const scheduleData = [
       { time: "17:30", speaker: "Isobel Wallace", title: "Block 7 Wrap-up", type: "experience", country: "UK" }
     ],
     arcade: [
-      { time: "16:15", endTime: "17:15", speaker: "Thiago Barrionuevo", title: "Survivors", type: "game", country: "",
+      { time: "16:15", endTime: "18:00", speaker: "Thiago Barrionuevo", title: "Survivors", type: "game", country: "",
         description: "An online cooperative game where each player has unique, partial information and must collaborate, share clues, and make fast decisions to succeed." }
     ],
     talentExchange: [
@@ -281,7 +281,7 @@ const scheduleData = [
         description: "Explore the world in this team-based strategy game. Then land back in your own community to consider how you can vibe-code a game as far-reaching!" }
     ],
     talentExchange: [
-      { time: "19:30", endTime: "20:30", speaker: "Keith Lillico", title: "Supercharge Your Network, Supercharge Your Career", country: "" },
+      { time: "19:30", endTime: "20:00", speaker: "Keith Lillico", title: "Supercharge Your Network, Supercharge Your Career", country: "" },
       { time: "21:30", endTime: "23:00", speaker: "", title: "Talent Exchange Speed Networking Event", country: "" }
     ]
   }
