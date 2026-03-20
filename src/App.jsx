@@ -187,7 +187,7 @@ const scheduleData = [
     ],
     talentExchange: [
       { time: "01:00", endTime: "01:30", speaker: "Jazmin Webster", title: "Bored or Onboard: Rethinking Your Employee\'s Day 1 Experience", country: "" },
-      { time: "01:30", endTime: "02:00", speaker: "Joshua Yavelberg", title: "Whatcha Wanna Know About Being Agile", country: "" }
+      { time: "01:30", endTime: "02:00", speaker: "Joshua Yavelberg", title: "Whatcha Wanna Know About Being AI-gile?", country: "" }
     ]
   },
   {
