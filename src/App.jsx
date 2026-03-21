@@ -614,14 +614,16 @@ export default function GamiCon48VLanding() {
                 Playful Learning!
               </span>
             </h2>
-            <p className="text-lg text-slate-300 max-w-2xl mx-auto">
-              Your session schedule — browse by block, add sessions to your calendar, and follow along live.
-            </p>
-            <div className="mt-6 max-w-2xl mx-auto text-lg text-slate-300 leading-relaxed space-y-2 text-left sm:text-center">
-              <p><span className="text-white font-semibold">Main Sessions</span> occur in the Imaginarium. Enter the Auditorium inside the Imaginarium to join a session.</p>
-              <p><span className="text-white font-semibold">Talent Exchange</span> is in the Sententia World Headquarters building. Seek the Talent Exchange banner as you enter Headquarters.</p>
-              <p><span className="text-white font-semibold">Gameful Experiences</span> happen in the Arcade.</p>
-            </div>
+          </div>
+        </section>
+
+        {/* Session Guide */}
+        <section className="relative z-10 px-4 pb-6">
+          <div className="max-w-6xl mx-auto text-lg text-slate-300 leading-relaxed space-y-2 text-left">
+            <p>Your session schedule — browse by block, add sessions to your calendar, and follow along live.</p>
+            <p><span className="text-white font-semibold">Main Sessions</span> occur in the Imaginarium. Enter the Auditorium inside the Imaginarium to join a session.</p>
+            <p><span className="text-white font-semibold">Talent Exchange</span> is in the Sententia World Headquarters building. Seek the Talent Exchange banner as you enter Headquarters.</p>
+            <p><span className="text-white font-semibold">Gameful Experiences</span> happen in the Arcade.</p>
           </div>
         </section>
 
