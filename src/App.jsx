@@ -15,8 +15,6 @@ function getLocalEventDates() {
   const endDay = endLocal.getDate();
   const year = startLocal.getFullYear();
   
-  // If same month, show "March 21–23, 2026"
-  // If different months, show "March 31 – April 2, 2026"
   if (startMonth === endMonth) {
     return `${startMonth} ${startDay}–${endDay}, ${year}`;
   } else {
@@ -24,11 +22,30 @@ function getLocalEventDates() {
   }
 }
 
+// Get block date range dynamically based on timezone setting
+function getBlockDateRange(gmtStart, gmtEnd, showSententral) {
+  const start = new Date(gmtStart);
+  // Use 1ms before end so we get the correct calendar day for the block's last moment
+  const endAdjusted = new Date(new Date(gmtEnd).getTime() - 1);
+  
+  const options = { weekday: 'short', month: 'short', day: 'numeric' };
+  if (showSententral) {
+    options.timeZone = 'America/Chicago';
+  }
+  
+  const startStr = start.toLocaleDateString('en-US', options);
+  const endStr = endAdjusted.toLocaleDateString('en-US', options);
+  
+  if (startStr === endStr) {
+    return startStr;
+  }
+  return `${startStr} – ${endStr}`;
+}
+
 // Schedule data organized by block
 const scheduleData = [
   {
     block: 1,
-    date: "Sat Mar 21 – Sun Mar 22",
     centralStart: "7:00 PM",
     centralEnd: "1:00 AM",
     gmtStart: "2026-03-22T00:00:00Z",
@@ -62,7 +79,6 @@ const scheduleData = [
   },
   {
     block: 2,
-    date: "Sun Mar 22",
     centralStart: "1:00 AM",
     centralEnd: "7:00 AM",
     gmtStart: "2026-03-22T06:00:00Z",
@@ -93,7 +109,6 @@ const scheduleData = [
   },
   {
     block: 3,
-    date: "Sun Mar 22",
     centralStart: "7:00 AM",
     centralEnd: "1:00 PM",
     gmtStart: "2026-03-22T12:00:00Z",
@@ -128,7 +143,6 @@ const scheduleData = [
   },
   {
     block: 4,
-    date: "Sun Mar 22",
     centralStart: "1:00 PM",
     centralEnd: "7:00 PM",
     gmtStart: "2026-03-22T18:00:00Z",
@@ -165,7 +179,6 @@ const scheduleData = [
   },
   {
     block: 5,
-    date: "Sun Mar 22 – Mon Mar 23",
     centralStart: "7:00 PM",
     centralEnd: "1:00 AM",
     gmtStart: "2026-03-23T00:00:00Z",
@@ -197,7 +210,6 @@ const scheduleData = [
   },
   {
     block: 6,
-    date: "Mon Mar 23",
     centralStart: "1:00 AM",
     centralEnd: "7:00 AM",
     gmtStart: "2026-03-23T06:00:00Z",
@@ -227,7 +239,6 @@ const scheduleData = [
   },
   {
     block: 7,
-    date: "Mon Mar 23",
     centralStart: "7:00 AM",
     centralEnd: "1:00 PM",
     gmtStart: "2026-03-23T12:00:00Z",
@@ -260,7 +271,6 @@ const scheduleData = [
   },
   {
     block: 8,
-    date: "Mon Mar 23",
     centralStart: "1:00 PM",
     centralEnd: "7:00 PM",
     gmtStart: "2026-03-23T18:00:00Z",
@@ -343,7 +353,6 @@ function getSessionStartTime(session, block) {
 
 // Get session end time based on next session or block end
 function getSessionEndTime(session, sessionIndex, block, sessionsArray) {
-  // If session has explicit end time, use it (concurrent sessions)
   if (session.endTime) {
     const [hours, minutes] = session.endTime.split(':').map(Number);
     const date = new Date(block.gmtStart);
@@ -353,12 +362,10 @@ function getSessionEndTime(session, sessionIndex, block, sessionsArray) {
   
   const sessions = sessionsArray || block.sessions;
   
-  // If there's a next session, use its start time
   if (sessionIndex < sessions.length - 1) {
     return getSessionStartTime(sessions[sessionIndex + 1], block);
   }
   
-  // Otherwise use block end time
   return new Date(block.gmtEnd);
 }
 
@@ -435,15 +442,66 @@ function getGoogleCalendarUrl(session, sessionIndex, block) {
   return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}`;
 }
 
+// Determine which block is currently live (or next upcoming)
+function getCurrentBlockInfo() {
+  const now = new Date();
+  for (let i = 0; i < scheduleData.length; i++) {
+    const block = scheduleData[i];
+    const start = new Date(block.gmtStart);
+    const end = new Date(block.gmtEnd);
+    if (now >= start && now < end) {
+      return { status: 'live', blockNumber: block.block };
+    }
+  }
+  // Check if before the event
+  if (now < new Date(scheduleData[0].gmtStart)) {
+    return { status: 'upcoming', blockNumber: 1 };
+  }
+  // Check if after the event
+  if (now >= new Date(scheduleData[scheduleData.length - 1].gmtEnd)) {
+    return { status: 'ended', blockNumber: null };
+  }
+  // Between blocks — find the next one
+  for (let i = 0; i < scheduleData.length; i++) {
+    const start = new Date(scheduleData[i].gmtStart);
+    if (now < start) {
+      return { status: 'between', blockNumber: scheduleData[i].block };
+    }
+  }
+  return { status: 'unknown', blockNumber: null };
+}
+
 export default function GamiCon48VLanding() {
   const [showSententralTime, setShowSententralTime] = useState(false);
   const [userTimezone, setUserTimezone] = useState('');
   const [expandedBlock, setExpandedBlock] = useState(null);
   const [calendarMenuOpen, setCalendarMenuOpen] = useState(null);
+  const [currentBlockInfo, setCurrentBlockInfo] = useState({ status: 'unknown', blockNumber: null });
 
   useEffect(() => {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
     setUserTimezone(tz.replace(/_/g, ' '));
+    
+    // Load Josefin Sans from Google Fonts
+    if (!document.querySelector('link[href*="Josefin+Sans"]')) {
+      const link = document.createElement('link');
+      link.href = 'https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&display=swap';
+      link.rel = 'stylesheet';
+      document.head.appendChild(link);
+    }
+    
+    // Check current block status and auto-expand live block
+    const info = getCurrentBlockInfo();
+    setCurrentBlockInfo(info);
+    if (info.status === 'live') {
+      setExpandedBlock(info.blockNumber);
+    }
+    
+    // Update every 60 seconds
+    const interval = setInterval(() => {
+      setCurrentBlockInfo(getCurrentBlockInfo());
+    }, 60000);
+    return () => clearInterval(interval);
   }, []);
 
   // Close calendar menu when clicking outside
@@ -481,135 +539,98 @@ export default function GamiCon48VLanding() {
       </div>
 
       {/* Header */}
-      <header className="relative z-10 pt-8 pb-4 px-4">
+      <header className="relative z-10 pt-6 pb-2 px-4">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-2 sm:gap-3">
             {/* Stair-step icon */}
             <svg className="w-10 h-10 sm:w-12 sm:h-12" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              {/* Bottom row blocks */}
               <rect x="0" y="44" width="18" height="14" rx="2" fill="#c45c4a"/>
               <rect x="20" y="44" width="18" height="14" rx="2" fill="#85b1ce"/>
-              {/* Middle row blocks */}
               <rect x="20" y="28" width="18" height="14" rx="2" fill="#f5e6c8"/>
               <rect x="40" y="28" width="18" height="14" rx="2" fill="#4b6176"/>
-              {/* Top row block */}
               <rect x="40" y="12" width="18" height="14" rx="2" fill="#c45c4a"/>
-              {/* Circle on bottom-left block - blue */}
               <circle cx="9" cy="40" r="3" fill="#85b1ce"/>
-              {/* Circle on middle-left block - red */}
               <circle cx="29" cy="24" r="3" fill="#c45c4a"/>
-              {/* Star at the very top */}
               <polygon points="49,4 50.5,7.5 54,8 51.5,10.5 52,14 49,12.5 46,14 46.5,10.5 44,8 47.5,7.5" fill="#f59e0b"/>
             </svg>
-            {/* Text */}
             <div>
               <h1 className="text-xl sm:text-2xl font-bold text-white" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
                 GamiCon<span className="text-amber-400">48V</span>
               </h1>
-              <p className="text-slate-300 text-xs sm:text-sm">2026</p>
+              <p className="text-slate-300 text-xs sm:text-sm">Session Schedule</p>
             </div>
           </div>
-          <a 
-            href="https://www.sententiagamification.com/where-from" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="px-6 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-full hover:from-amber-400 hover:to-orange-400 transition-all shadow-lg hover:shadow-amber-500/25 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
-            style={{ fontFamily: 'Josefin Sans, sans-serif' }}
-          >
-            Register Now<span className="sr-only"> (opens in new tab)</span>
-          </a>
+          {/* Live / Status indicator */}
+          {currentBlockInfo.status === 'live' && (
+            <div className="flex items-center gap-2 px-4 py-2 bg-rose-900/50 border border-rose-400/50 rounded-full">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-rose-500"></span>
+              </span>
+              <span className="text-rose-300 text-sm font-semibold" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
+                Block {currentBlockInfo.blockNumber} Live
+              </span>
+            </div>
+          )}
+          {currentBlockInfo.status === 'upcoming' && (
+            <div className="flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full shadow-lg shadow-amber-500/20">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
+              </span>
+              <span className="text-white text-sm font-bold" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
+                Starting Soon
+              </span>
+            </div>
+          )}
+          {currentBlockInfo.status === 'between' && (
+            <div className="flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-sky-600 to-sky-500 rounded-full shadow-lg shadow-sky-500/20">
+              <span className="text-white text-sm font-bold" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
+                Next: Block {currentBlockInfo.blockNumber}
+              </span>
+            </div>
+          )}
+          {currentBlockInfo.status === 'ended' && (
+            <div className="flex items-center gap-2 px-4 py-2 bg-slate-700/50 border border-slate-500/30 rounded-full">
+              <span className="text-slate-300 text-sm font-semibold" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
+                Event Complete
+              </span>
+            </div>
+          )}
         </div>
       </header>
 
       {/* Main Content */}
       <main id="main-content">
         {/* Hero Section */}
-        <section className="relative z-10 px-4 py-12 sm:py-16 text-center">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-amber-400 uppercase tracking-widest text-xs sm:text-sm mb-4" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
-            {getLocalEventDates()} (Your Local Time) • Live Online
-          </p>
-          <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-tight" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
-            48 Hours of<br />
-            <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-red-400 bg-clip-text text-transparent text-amber-400">
-              Playful Learning
-            </span>
-          </h2>
-          <p className="text-lg sm:text-xl text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-            This is not a motivational event—it's a <strong className="text-white">PLAYFUL</strong> one. 
-            Join gamification experts, instructional designers, and learning innovators from around the globe.
-          </p>
-          
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-            <a 
-              href="https://www.sententiagamification.com/where-from" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-lg rounded-full hover:from-amber-400 hover:to-orange-400 active:from-amber-600 active:to-orange-600 transition-all shadow-xl hover:shadow-amber-500/30 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 min-h-[48px] text-center"
-              style={{ fontFamily: 'Josefin Sans, sans-serif' }}
-            >
-              Register Now →<span className="sr-only"> (opens in new tab)</span>
-            </a>
-            <a 
-              href="https://www.sententiagamification.com/gamicon48v" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto px-8 py-4 border-2 border-slate-500 text-slate-300 font-semibold text-lg rounded-full hover:border-amber-400 hover:text-amber-400 active:bg-slate-800 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 min-h-[48px] text-center"
-              style={{ fontFamily: 'Josefin Sans, sans-serif' }}
-            >
-              Learn More About GamiCon48V<span className="sr-only"> (opens in new tab)</span>
-            </a>
-          </div>
-
-        </div>
-      </section>
-
-      {/* Event Overview */}
-      <section className="relative z-10 px-4 py-16 bg-slate-800/50">
-        <div className="max-w-4xl mx-auto text-center">
-          <h3 className="text-3xl font-bold text-white mb-8" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
-            Reimagine Learning Through the Power of Play
-          </h3>
-          <p className="text-lg text-slate-300 leading-relaxed mb-8">
-            GamiCon48V is a <strong className="text-white">48-hour live online event</strong> for people who design learning. 
-            It brings together gamification and game-based learning experts, instructional designers, corporate trainers, 
-            and higher ed faculty from around the world.
-          </p>
-          <div className="grid md:grid-cols-4 gap-6 text-center">
-            <div className="bg-slate-700/50 rounded-xl p-6">
-              <div className="text-4xl font-bold text-amber-400 mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>8</div>
-              <p className="text-slate-300">Global Blocks</p>
-            </div>
-            <div className="bg-slate-700/50 rounded-xl p-6">
-              <div className="text-4xl font-bold text-amber-400 mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>55</div>
-              <p className="text-slate-300">Sessions</p>
-            </div>
-            <div className="bg-slate-700/50 rounded-xl p-6">
-              <div className="text-4xl font-bold text-amber-400 mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>59</div>
-              <p className="text-slate-300">Speakers</p>
-            </div>
-            <div className="bg-slate-700/50 rounded-xl p-6">
-              <div className="text-4xl font-bold text-amber-400 mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>12</div>
-              <p className="text-slate-300">Playshops</p>
+        <section className="relative z-10 px-4 py-8 sm:py-12 text-center">
+          <div className="max-w-4xl mx-auto">
+            <p className="text-amber-400 uppercase tracking-widest text-xs sm:text-sm mb-4" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
+              {getLocalEventDates()} (Your Local Time) • Live Online
+            </p>
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4 leading-tight" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
+              Welcome to 48 Hours of<br />
+              <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-red-400 bg-clip-text text-transparent text-amber-400">
+                Playful Learning!
+              </span>
+            </h2>
+            <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+              Your session schedule — browse by block, add sessions to your calendar, and follow along live.
+            </p>
+            <div className="mt-6 max-w-2xl mx-auto text-lg text-slate-300 leading-relaxed space-y-2 text-left sm:text-center">
+              <p><span className="text-white font-semibold">Main Sessions</span> occur in the Imaginarium. Enter the Auditorium inside the Imaginarium to join a session.</p>
+              <p><span className="text-white font-semibold">Talent Exchange</span> is in the Sententia World Headquarters building. Seek the Talent Exchange banner as you enter Headquarters.</p>
+              <p><span className="text-white font-semibold">Gameful Experiences</span> happen in the Arcade.</p>
             </div>
           </div>
-          <p className="text-slate-300 mt-8 text-lg">
-            Across eight hosted blocks, you'll learn new approaches, join the audience for Throwdown Showcase, 
-            connect with global leaders, and experience how gameful design transforms learning.
-          </p>
-        </div>
-      </section>
+        </section>
 
-      {/* Time Zone Toggle */}
-      <section className="relative z-30 px-4 py-4 sm:py-8 sm:sticky top-0 bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 shadow-xl">
+      {/* Time Zone Toggle - Sticky */}
+      <section className="relative z-30 px-4 py-4 sm:py-6 sm:sticky top-0 bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 shadow-xl">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="text-center sm:text-left">
-            <h4 className="text-white font-semibold" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
-              Session Schedule
-            </h4>
             <p className="text-slate-300 text-sm">
-              {showSententralTime ? 'Sententral Time (Central US)' : `Your local time (${userTimezone})`}
+              Showing times in {showSententralTime ? 'Sententral Time (Central US)' : `your local time (${userTimezone})`}
             </p>
           </div>
           <button
@@ -636,12 +657,16 @@ export default function GamiCon48VLanding() {
       </section>
 
       {/* Schedule Blocks */}
-      <section className="relative z-10 px-4 py-12">
-        <div className="max-w-6xl mx-auto space-y-8">
-          {scheduleData.map((block) => (
+      <section className="relative z-10 px-4 py-8">
+        <div className="max-w-6xl mx-auto space-y-6">
+          {scheduleData.map((block) => {
+            const isLive = currentBlockInfo.status === 'live' && currentBlockInfo.blockNumber === block.block;
+            return (
             <div 
               key={block.block} 
-              className="bg-slate-800/70 rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl"
+              className={`bg-slate-800/70 rounded-2xl overflow-hidden border shadow-xl ${
+                isLive ? 'border-rose-400/50 ring-1 ring-rose-400/30' : 'border-slate-700/50'
+              }`}
             >
               {/* Block Header */}
               <button
@@ -650,15 +675,28 @@ export default function GamiCon48VLanding() {
                 aria-expanded={expandedBlock === block.block}
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center flex-shrink-0 ${
+                    isLive ? 'bg-gradient-to-br from-rose-400 to-rose-600' : 'bg-gradient-to-br from-amber-500 to-orange-600'
+                  }`}>
                     <span className="text-xl sm:text-2xl font-bold text-white" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
                       {block.block}
                     </span>
                   </div>
                   <div>
-                    <h4 className="text-lg sm:text-xl font-bold text-white" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
-                      Block {block.block}: {block.date}
-                    </h4>
+                    <div className="flex items-center gap-2">
+                      <h4 className="text-lg sm:text-xl font-bold text-white" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
+                        Block {block.block}: {getBlockDateRange(block.gmtStart, block.gmtEnd, showSententralTime)}
+                      </h4>
+                      {isLive && (
+                        <span className="flex items-center gap-1 px-2 py-0.5 bg-rose-900/60 border border-rose-400/40 rounded-full text-xs text-rose-300 font-semibold">
+                          <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                          </span>
+                          LIVE
+                        </span>
+                      )}
+                    </div>
                     <p className="text-amber-400 text-sm">
                       {showSententralTime 
                         ? `${block.centralStart} – ${block.centralEnd} Central`
@@ -1049,40 +1087,8 @@ export default function GamiCon48VLanding() {
                 </div>
               )}
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="relative z-10 px-4 py-20 text-center bg-gradient-to-t from-slate-900 to-transparent">
-        <div className="max-w-3xl mx-auto">
-          <h3 className="text-4xl font-bold text-white mb-6" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
-            Ready to Play?
-          </h3>
-          <p className="text-xl text-slate-300 mb-8">
-            Join learning designers from around the world for 48 hours of hands-on, playful exploration.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="https://www.sententiagamification.com/where-from" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-lg sm:text-xl rounded-full hover:from-amber-400 hover:to-orange-400 active:from-amber-600 active:to-orange-600 transition-all shadow-xl hover:shadow-amber-500/30 hover:scale-105 text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 min-h-[48px]"
-              style={{ fontFamily: 'Josefin Sans, sans-serif' }}
-            >
-              Register Now →<span className="sr-only"> (opens in new tab)</span>
-            </a>
-            <a 
-              href="https://www.sententiagamification.com/gamicon48v" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto px-10 py-4 border-2 border-slate-500 text-slate-300 font-semibold text-lg sm:text-xl rounded-full hover:border-amber-400 hover:text-amber-400 active:bg-slate-800 transition-all text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 min-h-[48px]"
-              style={{ fontFamily: 'Josefin Sans, sans-serif' }}
-            >
-              Learn More About GamiCon48V<span className="sr-only"> (opens in new tab)</span>
-            </a>
-          </div>
+          );
+          })}
         </div>
       </section>
       </main>
@@ -1094,6 +1100,9 @@ export default function GamiCon48VLanding() {
             © 2026 Sententia Gamification. All rights reserved.
           </div>
           <div className="flex gap-6">
+            <a href="https://www.sententiagamification.com/gamicon48v" target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-amber-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 rounded">
+              GamiCon48V Home<span className="sr-only"> (opens in new tab)</span>
+            </a>
             <a href="https://www.linkedin.com/company/gamicon" target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-amber-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 rounded">
               LinkedIn<span className="sr-only"> (opens in new tab)</span>
             </a>
